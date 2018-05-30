@@ -5,6 +5,7 @@ import shooter.events.Listener;
 import shooter.events.types.GameInitiateEvent;
 import shooter.game.GameDisplay;
 import shooter.menu.shooterMenu;
+import shooter.music.MusicManager;
 
 public class InitializeListener implements Listener {
 
@@ -19,5 +20,6 @@ public class InitializeListener implements Listener {
         main.frame.add(main.menu, "menu");
         main.frame.add(new GameDisplay(), "gamedisplay");
         main.frame.lay.show(main.menu.getParent(), "menu");
+        MusicManager.playClip("bomb_x");
     }
 }

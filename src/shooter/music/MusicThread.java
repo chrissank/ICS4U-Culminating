@@ -1,6 +1,11 @@
 package shooter.music;
 
-public class MusicThread {
+public class MusicThread extends Thread {
+    
+    
+    public void run() {
+        
+    }
 
     
     /*
