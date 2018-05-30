@@ -73,4 +73,26 @@ public class shooterMenu extends JPanel implements ActionListener {
 			//Hard difficulty
 		}
 	}
+	
+	public void InitializeGuiDetails() {
+		play.addActionListener(this);
+		quit.addActionListener(this);
+		play.setActionCommand("Play");
+		quit.setActionCommand("Quit");
+		buttonsPanel.add(play);
+		buttonsPanel.add(quit);
+		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+		
+		confirmPlay.addActionListener(this);
+		confirmPlay.setActionCommand("Go");
+		difficultiesGroup.add(easyDifficulty);
+		difficultiesGroup.add(mediumDifficulty);
+		difficultiesGroup.add(hardDifficulty);
+		confirmPlayPanel.add(easyDifficulty);
+		confirmPlayPanel.add(mediumDifficulty);
+		confirmPlayPanel.add(hardDifficulty);
+		confirmPlayPanel.add(confirmPlay);
+		confirmPlayPanel.setLayout(new BoxLayout(confirmPlayPanel, BoxLayout.Y_AXIS));
+		confirmPlayPanel.setVisible(false);
+	}
 }
