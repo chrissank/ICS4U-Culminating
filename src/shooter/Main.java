@@ -30,7 +30,7 @@ public class Main {
     
     public void initialize() {
         registerListeners();
-        playClip();
+        //playClip();
         frame = new GameFrame();
         EventHandler.callEvent(new GameInitiateEvent(100));
     }
