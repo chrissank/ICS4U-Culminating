@@ -1,7 +1,7 @@
 package shooter.game;
 
 /*
- * Heartbeat of the thread - will try to keep to 40 ticks per second
+ * Heartbeat of the ingame - will try to keep to 40 ticks per second
  */
 public class GameThread extends Thread {
     

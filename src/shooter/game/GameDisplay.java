@@ -1,11 +1,10 @@
 package shooter.game;
 
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class GameDisplay extends JFrame {
+public class GameDisplay extends JPanel {
     private static final long serialVersionUID = 1L;
 
-    
     public GameDisplay() {
     }
 }

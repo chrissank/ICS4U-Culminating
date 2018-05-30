@@ -1,3 +1,5 @@
+package shooter;
+
 import java.io.IOException;
 
 import javax.sound.sampled.AudioInputStream;
@@ -7,6 +9,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import shooter.events.EventHandler;
+import shooter.events.types.GameInitiateEvent;
 
 
 /**
@@ -17,7 +20,7 @@ import shooter.events.EventHandler;
 public class Main {
 
     static Main instance;
-    
+    GameFrame frame;
     //Main.class.getResourceAsStream("/resources/strings.txt"))
     public static void main(String[] args) throws IOException {
         instance = new Main();
@@ -28,11 +31,12 @@ public class Main {
     public void initialize() {
         registerListeners();
         playClip();
+        frame = new GameFrame();
+        EventHandler.callEvent(new GameInitiateEvent(100));
     }
     
     public void playClip() {
         Thread th = new Thread(() -> {
-            System.out.println("test");
             AudioInputStream ais;
             try {
                 ais = AudioSystem.getAudioInputStream(Main.class.getResourceAsStream("/resources/bomb_x.wav"));
@@ -40,7 +44,7 @@ public class Main {
 
                 test.open(ais);
                 test.start();
-                Thread.sleep(1000);
+                Thread.sleep(5000);
 
                 test.close();
             } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | InterruptedException e) {
@@ -56,6 +60,10 @@ public class Main {
      */
     public void registerListeners() {
         EventHandler.registerListener(new TestListener());
+    }
+    
+    public GameFrame getFrame() {
+        return this.frame;
     }
     
     public static Main getInstance() {
