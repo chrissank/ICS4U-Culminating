@@ -1,10 +1,12 @@
 package shooter.menu;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -13,7 +15,7 @@ import javax.swing.JRadioButton;
 
 public class shooterMenu extends JPanel implements ActionListener {
 
-	JLabel title = new JLabel("SHOOTER GAME");
+	JLabel title = new JLabel("SHOOTER GAME (Name TBD)");
 	JButton play = new JButton("Play");
 	JButton quit = new JButton("Quit");
 	JPanel buttonsPanel = new JPanel();
@@ -44,7 +46,7 @@ public class shooterMenu extends JPanel implements ActionListener {
 		
 		else if (arg0.getActionCommand().equals("Quit"))
 		{
-			int confirmed = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?","Exit",JOptionPane.YES_NO_OPTION);
+			int confirmed = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?","Exit?",JOptionPane.YES_NO_OPTION);
 		       
 	        if(confirmed == JOptionPane.YES_OPTION)
 	        {
@@ -75,6 +77,9 @@ public class shooterMenu extends JPanel implements ActionListener {
 	}
 	
 	public void InitializeGuiDetails() {
+		title.setFont(new Font("Roboto", Font.ITALIC, 50));
+		title.setAlignmentX(CENTER_ALIGNMENT);
+		
 		play.addActionListener(this);
 		quit.addActionListener(this);
 		play.setActionCommand("Play");
