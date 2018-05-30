@@ -1,18 +1,65 @@
 import java.io.IOException;
 
-import shooter.events.EventHandler;
-import shooter.events.types.GameInitiateEvent;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
+import shooter.events.EventHandler;
+
+
+/**
+ * 
+ * @author Chris Sankey & Mitchell LeLeiver 29/5/2018
+ *
+ */
 public class Main {
 
+    static Main instance;
+    
     //Main.class.getResourceAsStream("/resources/strings.txt"))
     public static void main(String[] args) throws IOException {
-        registerListeners();
-        EventHandler.callEvent(new GameInitiateEvent());
+        instance = new Main();
+        instance.initialize();
     }
     
-    public static void registerListeners() {
+    
+    public void initialize() {
+        registerListeners();
+        playClip();
+    }
+    
+    public void playClip() {
+        Thread th = new Thread(() -> {
+            System.out.println("test");
+            AudioInputStream ais;
+            try {
+                ais = AudioSystem.getAudioInputStream(Main.class.getResourceAsStream("/resources/bomb_x.wav"));
+                Clip test = AudioSystem.getClip();  
+
+                test.open(ais);
+                test.start();
+                Thread.sleep(1000);
+
+                test.close();
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } 
+        });
+        th.start();
+    }
+    
+    /**
+     * Make sure correct listeners are registered first in terms of priority
+     */
+    public void registerListeners() {
         EventHandler.registerListener(new TestListener());
+    }
+    
+    public static Main getInstance() {
+        return instance;
     }
     
 }
