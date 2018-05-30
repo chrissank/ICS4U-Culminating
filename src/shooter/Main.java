@@ -10,6 +10,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import shooter.events.EventHandler;
 import shooter.events.types.GameInitiateEvent;
+import shooter.game.GameDisplay;
 import shooter.menu.shooterMenu;
 
 
@@ -22,6 +23,7 @@ public class Main {
 
     static Main instance;
     GameFrame frame;
+    shooterMenu menu;
     //Main.class.getResourceAsStream("/resources/strings.txt"))
     public static void main(String[] args) throws IOException {
         instance = new Main();
@@ -33,7 +35,10 @@ public class Main {
         registerListeners();
         //playClip();
         frame = new GameFrame();
-        frame.add(new shooterMenu(), "Menu");
+        menu = new shooterMenu();
+        frame.add(menu, "menu");
+        frame.add(new GameDisplay(), "gamedisplay");
+        frame.lay.show(menu.getParent(), "menu");
         EventHandler.callEvent(new GameInitiateEvent(100));
     }
     
