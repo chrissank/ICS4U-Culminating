@@ -1,5 +1,6 @@
 package shooter.menu;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,13 +23,15 @@ public class shooterMenu extends JPanel implements ActionListener {
 		play.setActionCommand("Play");
 		quit.setActionCommand("Quit");
 		
+		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		buttonsPanel.add(play);
 		buttonsPanel.add(quit);
-		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
 		
+		this.setBackground(Color.red);
 		this.add(title);
 		this.add(buttonsPanel);
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setName("menu");
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
