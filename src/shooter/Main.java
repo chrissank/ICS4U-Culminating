@@ -10,11 +10,12 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import shooter.events.EventHandler;
 import shooter.events.types.GameInitiateEvent;
+import shooter.menu.shooterMenu;
 
 
 /**
  * 
- * @author Chris Sankey & Mitchell LeLeiver 29/5/2018
+ * @author Chris Sankey & Mitchell LeLiever 29/5/2018
  *
  */
 public class Main {
@@ -32,6 +33,7 @@ public class Main {
         registerListeners();
         //playClip();
         frame = new GameFrame();
+        frame.add(new shooterMenu(), "Menu");
         EventHandler.callEvent(new GameInitiateEvent(100));
     }
     
