@@ -3,7 +3,7 @@ package shooter;
 import java.io.IOException;
 
 import shooter.events.EventHandler;
-import shooter.events.types.GameInitiateEvent;
+import shooter.events.types.InitiateEvent;
 import shooter.menu.shooterMenu;
 
 
@@ -25,7 +25,7 @@ public class Main {
     }
 
     public void initialize() {
-        EventHandler.callEvent(new GameInitiateEvent(100));
+        EventHandler.callEvent(new InitiateEvent(13817382));
     }
 
     /**

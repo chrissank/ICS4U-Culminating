@@ -10,8 +10,7 @@ public class EventHandler {
     private static HashMap<Class<? extends Event>, ArrayList<Listener>> listeners = new HashMap<>();
     
     public static void registerListener(Listener cl) {
-        Method[] methods = cl.getClass().getMethods();
-        for(Method m : methods) {
+        for(Method m : cl.getClass().getMethods()) {
             EventListener anno = m.getAnnotation(EventListener.class);
             if(anno == null) continue;
             @SuppressWarnings("unchecked") // Could be unchecked bc we don't have any above method checks.. but you could verify that this parameter is actually correct
