@@ -20,13 +20,15 @@ public class EventHandler {
         }
     }
     
-    
     public static void callEvent(Event e) {
         if(!listeners.containsKey(e.getClass())) return;
         for(Listener l : listeners.get(e.getClass())) {
             for(Method m : l.getClass().getMethods()) {
                 EventListener anno = m.getAnnotation(EventListener.class);
                 if(anno == null) continue;
+                @SuppressWarnings("unchecked") // Could be unchecked bc we don't have any above method checks.. but you could verify that this parameter is actually correct
+                Class<? extends Event> param = (Class<? extends Event>) m.getParameterTypes()[0];
+                if(param != e.getClass()) return;
                 try {
                     m.invoke(l, e);
                 } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {

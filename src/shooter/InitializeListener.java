@@ -20,7 +20,7 @@ public class InitializeListener implements Listener {
         main.frame.add(main.menu, "menu");
         main.frame.add(new GameDisplay(), "gamedisplay");
         main.frame.lay.show(main.menu.getParent(), "menu");
-        System.out.println(e.getTime());
         MusicManager.playClip("bomb_x");
     }
+
 }
