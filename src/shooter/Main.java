@@ -34,10 +34,9 @@ public class Main {
      * Make sure correct listeners are registered first in terms of priority
      */
     public void registerListeners() {
-        EventHandler.registerListener(new CoreListeners()); // First
-        
-        
         EventHandler.registerListener(new InitializeListener());
+        
+        EventHandler.registerListener(new CoreListeners()); // Must be last
     }
 
     public GameFrame getFrame() {

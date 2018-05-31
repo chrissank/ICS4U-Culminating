@@ -11,9 +11,12 @@ public class InitializeListener implements Listener {
 
     Main main;
     
+    public InitializeListener() {
+        main = Main.getInstance();
+    }
+    
     @EventListener
     public void onInit(InitiateEvent e) {
-        main = Main.getInstance();
         //playClip();
         main.frame = new GameFrame();
         main.menu = new shooterMenu();

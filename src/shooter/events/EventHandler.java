@@ -28,7 +28,7 @@ public class EventHandler {
                 if(anno == null) continue;
                 @SuppressWarnings("unchecked") // Could be unchecked bc we don't have any above method checks.. but you could verify that this parameter is actually correct
                 Class<? extends Event> param = (Class<? extends Event>) m.getParameterTypes()[0];
-                if(param != e.getClass()) return;
+                if(param != e.getClass()) continue;
                 try {
                     m.invoke(l, e);
                 } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {
