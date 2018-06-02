@@ -24,7 +24,7 @@ public class shooterMenu extends JPanel implements ActionListener {
 	
 	JRadioButton easyDifficulty = new JRadioButton("Easy", true);
 	JRadioButton mediumDifficulty = new JRadioButton("Medium", false);
-	JRadioButton hardDifficulty = new JRadioButton("Hard", true);
+	JRadioButton hardDifficulty = new JRadioButton("Hard", false);
 	ButtonGroup difficultiesGroup = new ButtonGroup();
 	JPanel confirmPlayPanel = new JPanel();
 	JButton confirmPlay = new JButton("Go!");
@@ -60,24 +60,29 @@ public class shooterMenu extends JPanel implements ActionListener {
 		{
 			System.out.println("Playing game...");
 			//Call game event
+			
+			int diff = 0;
+            if(mediumDifficulty.isSelected()) diff += 1;
+            if(hardDifficulty.isSelected()) diff += 2;
+            EventHandler.callEvent(new GameInitiateEvent(diff));
 		}
 		
 		if (arg0.getSource() == easyDifficulty) 
 		{
 			//Easy difficulty (0)
-		    EventHandler.callEvent(new GameInitiateEvent(0));
+		    System.out.println("changed to easy");
 		}
 		
 		else if (arg0.getSource() == mediumDifficulty) 
 		{
 			//Medium difficulty (1)
-            EventHandler.callEvent(new GameInitiateEvent(1));
+            System.out.println("changed to meduim");
 		}
 		
 		else if (arg0.getSource() == hardDifficulty) 
 		{
 			//Hard difficulty (2)
-            EventHandler.callEvent(new GameInitiateEvent(2));
+            System.out.println("changed to hard");
 		}
 	}
 	
