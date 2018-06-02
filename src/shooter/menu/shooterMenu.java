@@ -6,12 +6,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+
+import shooter.events.EventHandler;
+import shooter.events.types.GameInitiateEvent;
 
 public class shooterMenu extends JPanel implements ActionListener {
 
@@ -62,17 +64,20 @@ public class shooterMenu extends JPanel implements ActionListener {
 		
 		if (arg0.getSource() == easyDifficulty) 
 		{
-			//Easy difficulty
+			//Easy difficulty (0)
+		    EventHandler.callEvent(new GameInitiateEvent(0));
 		}
 		
 		else if (arg0.getSource() == mediumDifficulty) 
 		{
-			//Medium difficulty
+			//Medium difficulty (1)
+            EventHandler.callEvent(new GameInitiateEvent(1));
 		}
 		
 		else if (arg0.getSource() == hardDifficulty) 
 		{
-			//Hard difficulty
+			//Hard difficulty (2)
+            EventHandler.callEvent(new GameInitiateEvent(2));
 		}
 	}
 	
