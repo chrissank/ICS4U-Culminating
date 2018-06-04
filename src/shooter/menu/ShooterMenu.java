@@ -15,7 +15,7 @@ import javax.swing.JRadioButton;
 import shooter.events.EventHandler;
 import shooter.events.types.GameInitiateEvent;
 
-public class shooterMenu extends JPanel implements ActionListener {
+public class ShooterMenu extends JPanel implements ActionListener {
 
 	JLabel title = new JLabel("SHOOTER GAME (Name TBD)");
 	JButton play = new JButton("Play");
@@ -29,7 +29,7 @@ public class shooterMenu extends JPanel implements ActionListener {
 	JPanel confirmPlayPanel = new JPanel();
 	JButton confirmPlay = new JButton("Go!");
 	
-	public shooterMenu() {	
+	public ShooterMenu() {	
 	
 		InitializeGuiDetails();
 		

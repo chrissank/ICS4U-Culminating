@@ -5,7 +5,7 @@ import java.io.IOException;
 import shooter.events.CoreListeners;
 import shooter.events.EventHandler;
 import shooter.events.types.InitiateEvent;
-import shooter.menu.shooterMenu;
+import shooter.menu.ShooterMenu;
 
 
 /**
@@ -17,7 +17,7 @@ public class Main {
 
     static Main instance;
     GameFrame frame;
-    shooterMenu menu;
+    ShooterMenu menu;
     
     //Main.class.getResourceAsStream("/resources/strings.txt"))
     public static void main(String[] args) throws IOException {
