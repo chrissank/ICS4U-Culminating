@@ -37,6 +37,7 @@ public class ShooterMenu extends JPanel implements ActionListener {
 		this.add(buttonsPanel);
 		this.add(confirmPlayPanel);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
@@ -66,24 +67,6 @@ public class ShooterMenu extends JPanel implements ActionListener {
             if(hardDifficulty.isSelected()) diff += 2;
             EventHandler.callEvent(new GameInitiateEvent(diff));
 		}
-		
-		if (arg0.getSource() == easyDifficulty) 
-		{
-			//Easy difficulty (0)
-		    System.out.println("changed to easy");
-		}
-		
-		else if (arg0.getSource() == mediumDifficulty) 
-		{
-			//Medium difficulty (1)
-            System.out.println("changed to meduim");
-		}
-		
-		else if (arg0.getSource() == hardDifficulty) 
-		{
-			//Hard difficulty (2)
-            System.out.println("changed to hard");
-		}
 	}
 	
 	public void InitializeGuiDetails() {
@@ -97,6 +80,7 @@ public class ShooterMenu extends JPanel implements ActionListener {
 		buttonsPanel.add(play);
 		buttonsPanel.add(quit);
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+		buttonsPanel.setAlignmentX(CENTER_ALIGNMENT);
 		
 		confirmPlay.addActionListener(this);
 		confirmPlay.setActionCommand("Go");
@@ -108,6 +92,7 @@ public class ShooterMenu extends JPanel implements ActionListener {
 		confirmPlayPanel.add(hardDifficulty);
 		confirmPlayPanel.add(confirmPlay);
 		confirmPlayPanel.setLayout(new BoxLayout(confirmPlayPanel, BoxLayout.Y_AXIS));
+		confirmPlayPanel.setAlignmentX(CENTER_ALIGNMENT);
 		confirmPlayPanel.setVisible(false);
 	}
 }
