@@ -1,6 +1,7 @@
 package shooter.game;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -30,7 +31,11 @@ public class GameDisplay extends JPanel {
 		g2.setPaint(Color.RED);
 		int healthBarX = this.getWidth() / 2;
 		int healthBarY = this.getHeight() - 70;
-		g2.draw(new Rectangle2D.Double(healthBarX - 150, healthBarY, 300, 40)); //Border
-		g2.fill(new Rectangle2D.Double(healthBarX - 150, healthBarY, playerHealthDemo * 3, 40)); //Health
+		g2.draw(new Rectangle2D.Double(healthBarX - 150, healthBarY, 300, 40)); //Health bar border
+		g2.fill(new Rectangle2D.Double(healthBarX - 150, healthBarY, playerHealthDemo * 3, 40)); //Health bar fill
+		
+		g2.setPaint(Color.BLACK);
+		g2.setFont(new Font("Roboto", Font.PLAIN, 20));
+		g2.drawString(Integer.toString(playerHealthDemo), healthBarX, healthBarY + 60); // Health number below health bar
 	}
 }
