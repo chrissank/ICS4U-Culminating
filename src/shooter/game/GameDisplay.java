@@ -4,14 +4,17 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.geom.Rectangle2D;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class GameDisplay extends JPanel {
     private static final long serialVersionUID = 1L;
     
     int playerHealthDemo = 75;
+    //Image pistolAmmo = ImageIO.read(getClass().getClassLoader(("/resources/Pistol_Ammo_Icon.png")));
     
     public GameDisplay() {
     }
