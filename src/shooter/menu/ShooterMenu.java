@@ -1,12 +1,8 @@
 package shooter.menu;
 
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Rectangle2D;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -17,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import shooter.events.EventHandler;
-import shooter.events.types.GameInitiateEvent;
+import shooter.events.types.PreGameInitiateEvent;
 
 public class ShooterMenu extends JPanel implements ActionListener {
 
@@ -69,7 +65,7 @@ public class ShooterMenu extends JPanel implements ActionListener {
 			int diff = 0;
             if(mediumDifficulty.isSelected()) diff += 1;
             if(hardDifficulty.isSelected()) diff += 2;
-            EventHandler.callEvent(new GameInitiateEvent(diff));
+            EventHandler.callEvent(new PreGameInitiateEvent(diff));
 		}
 	}
 	

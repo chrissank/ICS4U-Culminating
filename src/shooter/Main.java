@@ -5,6 +5,7 @@ import java.io.IOException;
 import shooter.events.CoreListeners;
 import shooter.events.EventHandler;
 import shooter.events.types.InitiateEvent;
+import shooter.game.GameDisplay;
 import shooter.menu.ShooterMenu;
 
 
@@ -18,6 +19,7 @@ public class Main {
     static Main instance;
     GameFrame frame;
     ShooterMenu menu;
+    GameDisplay game;
     
     //Main.class.getResourceAsStream("/resources/strings.txt"))
     public static void main(String[] args) throws IOException {
@@ -41,6 +43,14 @@ public class Main {
 
     public GameFrame getFrame() {
         return this.frame;
+    }
+    
+    public ShooterMenu getMenu() {
+        return this.menu;
+    }
+    
+    public GameDisplay getDisplay() {
+        return this.game;
     }
 
     public static Main getInstance() {
