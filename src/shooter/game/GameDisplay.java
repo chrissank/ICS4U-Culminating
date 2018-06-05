@@ -22,7 +22,6 @@ public class GameDisplay extends JPanel {
     int pistolAmmoDemo = 60; 
     BufferedImage pistolAmmo;
     BufferedImage playerImage;
-    int pistolAmmoDemo = 60; 
     
     BufferedImage pistolAmmoImg;
     BufferedImage backgroundImg;
