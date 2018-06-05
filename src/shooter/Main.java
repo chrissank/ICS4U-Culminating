@@ -8,6 +8,7 @@ import shooter.events.types.InitiateEvent;
 import shooter.game.GameDisplay;
 import shooter.game.GameListeners;
 import shooter.game.GameThread;
+import shooter.game.RepaintListener;
 import shooter.menu.ShooterMenu;
 
 
@@ -40,6 +41,7 @@ public class Main {
      */
     public void registerListeners() {
         EventHandler.registerListener(new InitializeListener());
+        EventHandler.registerListener(new RepaintListener());
         EventHandler.registerListener(new GameListeners());
         
         EventHandler.registerListener(new CoreListeners()); // Must be last

@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -72,6 +74,11 @@ public class GameDisplay extends JPanel {
 	}
 	
 	public void drawPlayer(Graphics2D g2) {
-	    
+	    Point m = MouseInfo.getPointerInfo().getLocation();
+	    float xDistance = m.x - player.getX();
+	    float yDistance = m.y - player.getY();
+	    double rotationAngle = Math.toDegrees(Math.atan2(yDistance, xDistance));
+	    g2.rotate(rotationAngle);
+	    g2.drawImage(playerImage, player.getX(), player.getY(), this);
 	}
 }
