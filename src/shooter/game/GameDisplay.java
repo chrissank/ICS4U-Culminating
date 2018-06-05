@@ -11,20 +11,26 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import shooter.entities.Player;
+import shooter.entities.WeaponType;
+
 public class GameDisplay extends JPanel {
     private static final long serialVersionUID = 1L;
     
+    Player player;
     int playerHealthDemo = 75;
+  
     BufferedImage pistolAmmo;
-    //
-    
+    BufferedImage playerImage;
     
     public GameDisplay() {
         try {
 			pistolAmmo = ImageIO.read(GameDisplay.class.getResource("/resources/Pistol_Ammo_Icon.png"));
+			playerImage = ImageIO.read(GameDisplay.class.getResource("/resources/player_1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+        player = new Player(100, 100, 100, WeaponType.PISTOL, 100);
     }
     
     @Override
