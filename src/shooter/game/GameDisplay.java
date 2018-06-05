@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 public class GameDisplay extends JPanel {
     private static final long serialVersionUID = 1L;
     
+    //REPLACE THESE WITH THE PROPER VARIABLES FROM PLAYER CLASS
     int playerHealthDemo = 75;
     int pistolAmmoDemo = 60; 
     
@@ -23,6 +24,7 @@ public class GameDisplay extends JPanel {
     public GameDisplay() {
         try {
 			pistolAmmoImg = ImageIO.read(GameDisplay.class.getResource("/resources/Pistol_Ammo_Icon.png"));
+			backgroundImg = ImageIO.read(GameDisplay.class.getResource("/resources/Background.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -44,6 +46,9 @@ public class GameDisplay extends JPanel {
 	
 	public void DrawHUD(Graphics2D g2)
 	{
+		//Background
+		g2.drawImage(backgroundImg, 0, 0, this);
+		
 		//Health bar
 		g2.setPaint(Color.RED);
 		int healthBarX = this.getWidth() / 2;
@@ -55,8 +60,9 @@ public class GameDisplay extends JPanel {
 		g2.setFont(new Font("Roboto", Font.PLAIN, 20));
 		g2.drawString(Integer.toString(playerHealthDemo), healthBarX, healthBarY + 60); // Health number below health bar
 		
+		//Pistol ammo
 		g2.drawImage(pistolAmmoImg, 1165, 990, this);
-		g2.drawString(Integer.toString(pistolAmmoDemo), 1240, 1040);
+		g2.drawString(Integer.toString(pistolAmmoDemo), 1240, 1040); 
 		
 	
 	}
