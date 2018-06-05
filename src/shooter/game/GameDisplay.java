@@ -19,10 +19,12 @@ public class GameDisplay extends JPanel {
     
     Player player;
     int playerHealthDemo = 75;
-  
+    int pistolAmmoDemo = 60; 
     BufferedImage pistolAmmo;
     BufferedImage playerImage;
     
+    BufferedImage pistolAmmoImg;
+    BufferedImage backgroundImg;
     public GameDisplay() {
         try {
 			pistolAmmo = ImageIO.read(GameDisplay.class.getResource("/resources/Pistol_Ammo_Icon.png"));
@@ -59,6 +61,10 @@ public class GameDisplay extends JPanel {
 		g2.setPaint(Color.BLACK);
 		g2.setFont(new Font("Roboto", Font.PLAIN, 20));
 		g2.drawString(Integer.toString(playerHealthDemo), healthBarX, healthBarY + 60); // Health number below health bar
+		
+		g2.drawImage(pistolAmmoImg, 1165, 990, this);
+		g2.drawString(Integer.toString(pistolAmmoDemo), 1240, 1040);
+		
 	
 	}
 	
