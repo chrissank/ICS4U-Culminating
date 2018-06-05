@@ -16,7 +16,6 @@ public class GameDisplay extends JPanel {
     
     int playerHealthDemo = 75;
     BufferedImage pistolAmmo;
-    // 
     
     
     public GameDisplay() {
@@ -53,6 +52,8 @@ public class GameDisplay extends JPanel {
 		g2.setPaint(Color.BLACK);
 		g2.setFont(new Font("Roboto", Font.PLAIN, 20));
 		g2.drawString(Integer.toString(playerHealthDemo), healthBarX, healthBarY + 60); // Health number below health bar
+		
+		g2.drawImage(pistolAmmo, 0, 0, this);
 		
 		System.out.println("repaint");
 	}
