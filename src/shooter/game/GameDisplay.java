@@ -67,7 +67,7 @@ public class GameDisplay extends JPanel {
 		//Pistol ammo
 		g2.drawImage(pistolAmmoImg, 1165, 990, this);
 		g2.drawString(Integer.toString(player.getAmmo()), 1240, 1040); 
-		
+		// 
 	
 	}
 	
