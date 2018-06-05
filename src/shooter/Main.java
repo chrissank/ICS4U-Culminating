@@ -19,10 +19,10 @@ import shooter.menu.ShooterMenu;
 public class Main {
 
     static Main instance;
-    GameFrame frame;
-    ShooterMenu menu;
-    GameDisplay game;
-    GameThread thread;
+    public GameFrame frame;
+    public ShooterMenu menu;
+    public GameDisplay gamedisplay;
+    public GameThread thread;
     
     //Main.class.getResourceAsStream("/resources/strings.txt"))
     public static void main(String[] args) throws IOException {
@@ -43,18 +43,6 @@ public class Main {
         EventHandler.registerListener(new GameListeners());
         
         EventHandler.registerListener(new CoreListeners()); // Must be last
-    }
-
-    public GameFrame getFrame() {
-        return this.frame;
-    }
-    
-    public ShooterMenu getMenu() {
-        return this.menu;
-    }
-    
-    public GameDisplay getDisplay() {
-        return this.game;
     }
 
     public static Main getInstance() {

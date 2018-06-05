@@ -4,6 +4,7 @@ import shooter.Main;
 import shooter.events.EventListener;
 import shooter.events.Listener;
 import shooter.events.types.GameInitiateEvent;
+import shooter.events.types.PreGameInitiateEvent;
 
 public class GameListeners implements Listener {
     
@@ -13,8 +14,15 @@ public class GameListeners implements Listener {
     }
     
     @EventListener
+    public void onGamePreInit(PreGameInitiateEvent e) {
+        main.thread = new GameThread();
+    }
+    
+    
+    @EventListener
     public void onGameInit(GameInitiateEvent e) {
-        main.getFrame().getLayout().show(main.getDisplay().getParent(), "gamedisplay");
+        main.thread.start();
+        main.frame.getLayout().show(main.gamedisplay.getParent(), "gamedisplay");
     }
 
 }

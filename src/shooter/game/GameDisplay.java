@@ -14,7 +14,6 @@ public class GameDisplay extends JPanel {
     private static final long serialVersionUID = 1L;
     
     int playerHealthDemo = 75;
-    //Image pistolAmmo = ImageIO.read(getClass().getClassLoader(("/resources/Pistol_Ammo_Icon.png")));
     
     public GameDisplay() {
         
@@ -47,7 +46,6 @@ public class GameDisplay extends JPanel {
 		g2.setFont(new Font("Roboto", Font.PLAIN, 20));
 		g2.drawString(Integer.toString(playerHealthDemo), healthBarX, healthBarY + 60); // Health number below health bar
 		
-		System.out.println("repaint");
 	}
 	
 	public void drawPlayer(Graphics2D g2) {
