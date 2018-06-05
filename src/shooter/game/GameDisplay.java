@@ -15,16 +15,14 @@ public class GameDisplay extends JPanel {
     private static final long serialVersionUID = 1L;
     
     int playerHealthDemo = 75;
-    BufferedImage pistolAmmo;
-<<<<<<< HEAD
-=======
-    //
->>>>>>> branch 'master' of https://github.com/Pixelatorx2/ICS4U-Culminating.git
+    int pistolAmmoDemo = 60; 
     
+    BufferedImage pistolAmmoImg;
+    BufferedImage backgroundImg;
     
     public GameDisplay() {
         try {
-			pistolAmmo = ImageIO.read(GameDisplay.class.getResource("/resources/Pistol_Ammo_Icon.png"));
+			pistolAmmoImg = ImageIO.read(GameDisplay.class.getResource("/resources/Pistol_Ammo_Icon.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -56,14 +54,11 @@ public class GameDisplay extends JPanel {
 		g2.setPaint(Color.BLACK);
 		g2.setFont(new Font("Roboto", Font.PLAIN, 20));
 		g2.drawString(Integer.toString(playerHealthDemo), healthBarX, healthBarY + 60); // Health number below health bar
-<<<<<<< HEAD
 		
-		g2.drawImage(pistolAmmo, 0, 0, this);
+		g2.drawImage(pistolAmmoImg, 1165, 990, this);
+		g2.drawString(Integer.toString(pistolAmmoDemo), 1240, 1040);
 		
-		System.out.println("repaint");
-=======
 	
->>>>>>> branch 'master' of https://github.com/Pixelatorx2/ICS4U-Culminating.git
 	}
 	
 	public void drawPlayer(Graphics2D g2) {
