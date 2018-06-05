@@ -15,6 +15,7 @@ public class GameDisplay extends JPanel {
     private static final long serialVersionUID = 1L;
     
     //REPLACE THESE WITH THE PROPER VARIABLES FROM PLAYER CLASS
+    Player player;
     int playerHealthDemo = 75;
     int pistolAmmoDemo = 60; 
     
@@ -25,9 +26,11 @@ public class GameDisplay extends JPanel {
         try {
 			pistolAmmoImg = ImageIO.read(GameDisplay.class.getResource("/resources/Pistol_Ammo_Icon.png"));
 			backgroundImg = ImageIO.read(GameDisplay.class.getResource("/resources/Background.png"));
+			playerImage = ImageIO.read(GameDisplay.class.getResource("/resources/player_1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+        player = new Player(100, 100, 100, WeaponType.PISTOL, 100);
     }
     
     @Override
