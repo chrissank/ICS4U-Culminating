@@ -72,7 +72,7 @@ public class ShooterMenu extends JPanel implements ActionListener {
 	public void InitializeGuiDetails() {
 		title.setFont(new Font("Roboto", Font.ITALIC, 50));
 		title.setAlignmentX(CENTER_ALIGNMENT);
-		
+		//change
 		play.addActionListener(this);
 		quit.addActionListener(this);
 		play.setActionCommand("Play");
