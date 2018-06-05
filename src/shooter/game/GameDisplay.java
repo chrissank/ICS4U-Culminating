@@ -4,8 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -14,10 +15,16 @@ public class GameDisplay extends JPanel {
     private static final long serialVersionUID = 1L;
     
     int playerHealthDemo = 75;
-    //Image pistolAmmo = ImageIO.read(getClass().getClassLoader(("/resources/Pistol_Ammo_Icon.png")));
+    BufferedImage pistolAmmo;
+    // 
+    
     
     public GameDisplay() {
-        
+        try {
+			pistolAmmo = ImageIO.read(GameDisplay.class.getResource("/resources/Pistol_Ammo_Icon.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
     @Override
@@ -29,14 +36,14 @@ public class GameDisplay extends JPanel {
 		
 		Graphics2D g2 = (Graphics2D) g;
 		
-		//Health bar
-		HealthBar(g2);
+		DrawHUD(g2);
 		
 		drawPlayer(g2);
 	}
 	
-	public void HealthBar(Graphics2D g2)
+	public void DrawHUD(Graphics2D g2)
 	{
+		//Health bar
 		g2.setPaint(Color.RED);
 		int healthBarX = this.getWidth() / 2;
 		int healthBarY = this.getHeight() - 70;
