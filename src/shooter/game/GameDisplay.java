@@ -17,16 +17,22 @@ public class GameDisplay extends JPanel {
     //Image pistolAmmo = ImageIO.read(getClass().getClassLoader(("/resources/Pistol_Ammo_Icon.png")));
     
     public GameDisplay() {
+        
     }
     
+    @Override
 	public void paint(Graphics g)
 	{
 		super.paint(g);
+		
+		// background, walls, players, enemies
 		
 		Graphics2D g2 = (Graphics2D) g;
 		
 		//Health bar
 		HealthBar(g2);
+		
+		drawPlayer(g2);
 	}
 	
 	public void HealthBar(Graphics2D g2)
@@ -40,5 +46,11 @@ public class GameDisplay extends JPanel {
 		g2.setPaint(Color.BLACK);
 		g2.setFont(new Font("Roboto", Font.PLAIN, 20));
 		g2.drawString(Integer.toString(playerHealthDemo), healthBarX, healthBarY + 60); // Health number below health bar
+		
+		System.out.println("repaint");
+	}
+	
+	public void drawPlayer(Graphics2D g2) {
+	    
 	}
 }

@@ -6,6 +6,8 @@ import shooter.events.CoreListeners;
 import shooter.events.EventHandler;
 import shooter.events.types.InitiateEvent;
 import shooter.game.GameDisplay;
+import shooter.game.GameListeners;
+import shooter.game.GameThread;
 import shooter.menu.ShooterMenu;
 
 
@@ -20,6 +22,7 @@ public class Main {
     GameFrame frame;
     ShooterMenu menu;
     GameDisplay game;
+    GameThread thread;
     
     //Main.class.getResourceAsStream("/resources/strings.txt"))
     public static void main(String[] args) throws IOException {
@@ -37,6 +40,7 @@ public class Main {
      */
     public void registerListeners() {
         EventHandler.registerListener(new InitializeListener());
+        EventHandler.registerListener(new GameListeners());
         
         EventHandler.registerListener(new CoreListeners()); // Must be last
     }

@@ -17,16 +17,6 @@ public class CoreListeners implements Listener {
     public void onInitiateEvent(InitiateEvent e) {
         EventHandler.callEvent(new MenuInitiateEvent());
     }
-
-    @EventListener
-    public void onGameInitiateEvent(GameInitiateEvent e) {
-        System.out.println("game starting with " + e.getDifficulty() + " difficulty");
-        main.getFrame().
-        getLayout().show(
-                main.getDisplay().getParent(), 
-                "gamedisplay");
-        System.out.println("Panel switched");
-    }
     
     @EventListener
     public void onPreGameInitiateEvent(PreGameInitiateEvent e) {
