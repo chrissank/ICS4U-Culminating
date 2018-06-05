@@ -65,9 +65,10 @@ public class GameDisplay extends JPanel {
 		g2.drawString(Integer.toString(player.getHealth()), healthBarX, healthBarY + 60); // Health number below health bar
 		
 		//Pistol ammo
-		g2.drawImage(pistolAmmoImg, 1165, 990, this);
-		g2.drawString(Integer.toString(player.getAmmo()), 1240, 1040); 
-		// 
+		int ammoX = (this.getWidth() / 2) + 205;
+		int ammoY = this.getHeight() - 90;
+		g2.drawImage(pistolAmmoImg, ammoX, ammoY, this);
+		g2.drawString(Integer.toString(player.getAmmo()), ammoX + 75, ammoY + 50); 
 	
 	}
 	
