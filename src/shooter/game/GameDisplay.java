@@ -22,12 +22,13 @@ public class GameDisplay extends JPanel {
     int pistolAmmoDemo = 60; 
     BufferedImage pistolAmmo;
     BufferedImage playerImage;
+    int pistolAmmoDemo = 60; 
     
     BufferedImage pistolAmmoImg;
     BufferedImage backgroundImg;
     public GameDisplay() {
         try {
-			pistolAmmo = ImageIO.read(GameDisplay.class.getResource("/resources/Pistol_Ammo_Icon.png"));
+			pistolAmmoImg = ImageIO.read(GameDisplay.class.getResource("/resources/Pistol_Ammo_Icon.png"));
 			playerImage = ImageIO.read(GameDisplay.class.getResource("/resources/player_1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
