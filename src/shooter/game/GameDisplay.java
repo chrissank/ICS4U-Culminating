@@ -16,6 +16,10 @@ public class GameDisplay extends JPanel {
     
     int playerHealthDemo = 75;
     BufferedImage pistolAmmo;
+<<<<<<< HEAD
+=======
+    //
+>>>>>>> branch 'master' of https://github.com/Pixelatorx2/ICS4U-Culminating.git
     
     
     public GameDisplay() {
@@ -52,10 +56,14 @@ public class GameDisplay extends JPanel {
 		g2.setPaint(Color.BLACK);
 		g2.setFont(new Font("Roboto", Font.PLAIN, 20));
 		g2.drawString(Integer.toString(playerHealthDemo), healthBarX, healthBarY + 60); // Health number below health bar
+<<<<<<< HEAD
 		
 		g2.drawImage(pistolAmmo, 0, 0, this);
 		
 		System.out.println("repaint");
+=======
+	
+>>>>>>> branch 'master' of https://github.com/Pixelatorx2/ICS4U-Culminating.git
 	}
 	
 	public void drawPlayer(Graphics2D g2) {

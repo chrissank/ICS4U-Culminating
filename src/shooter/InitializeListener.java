@@ -20,10 +20,10 @@ public class InitializeListener implements Listener {
         //playClip();
         main.frame = new GameFrame();
         main.menu = new ShooterMenu();
-        main.game = new GameDisplay();
+        main.gamedisplay = new GameDisplay();
         main.frame.add(main.menu, "menu");
-        main.frame.add(main.game, "gamedisplay");
-        main.frame.lay.show(main.getMenu().getParent(), "menu");
+        main.frame.add(main.gamedisplay, "gamedisplay");
+        main.frame.lay.show(main.menu.getParent(), "menu");
         MusicManager.playClip("bomb_x");
     }
 

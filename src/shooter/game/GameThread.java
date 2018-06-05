@@ -11,7 +11,7 @@ public class GameThread extends Thread {
     
     public void run() {
         while(STATUS) {
-            Main.getInstance().getDisplay().repaint();
+            Main.getInstance().gamedisplay.repaint();
             
             
             try {
