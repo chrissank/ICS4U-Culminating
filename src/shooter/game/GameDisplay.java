@@ -51,6 +51,7 @@ public class GameDisplay extends JPanel {
 		DrawHUD(g2);
 		
 		drawPlayer(g2);
+		g2.dispose();
 	}
 	
 	public void DrawHUD(Graphics2D g2)
