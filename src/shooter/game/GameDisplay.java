@@ -57,18 +57,18 @@ public class GameDisplay extends JPanel {
 		//Health bar
 		int healthBarX = this.getWidth() / 2;
 		int healthBarY = this.getHeight() - 80;
+		
 		g2.setPaint(Color.BLACK);
 		g2.setStroke(new BasicStroke(6));
 		g2.draw(new Rectangle2D.Double(healthBarX - 150, healthBarY, 300, 40)); //Health bar border
-		g2.setPaint(Color.RED);
-		g2.fill(new Rectangle2D.Double(healthBarX - 150, healthBarY, player.getHealth() * 3, 40)); //Health bar filled portion
-		
+	
 		if (player.getHealth() < 100) {
 			g2.setPaint(Color.GRAY);
-			int emptyBarStart = (healthBarX - 150) + (player.getHealth() * 3);
-			int emptyBarFinish = 300 - (player.getHealth() * 3);
-			g2.fill(new Rectangle2D.Double(emptyBarStart, healthBarY, emptyBarFinish, 40)); //Health bar empty portion
+			g2.fill(new Rectangle2D.Double(healthBarX - 150, healthBarY, 300, 40)); //Health bar grey background portion
 		}
+		
+		g2.setPaint(Color.RED);
+		g2.fill(new Rectangle2D.Double(healthBarX - 150, healthBarY, player.getHealth() * 3, 40)); //Health bar filled portion
 		
 		g2.setPaint(Color.BLACK);
 		g2.setFont(new Font("Roboto", Font.BOLD, 22));
