@@ -35,6 +35,7 @@ public class GameDisplay extends JPanel implements ActionListener{
     BufferedImage pistolImg;
     BufferedImage pistolAmmoImg;
     BufferedImage rifleImg;
+    BufferedImage rifleAmmoImg;
     
     JButton pistolButton;
     JButton rifleButton;
@@ -45,17 +46,18 @@ public class GameDisplay extends JPanel implements ActionListener{
 			backgroundImg = ImageIO.read(GameDisplay.class.getResource("/resources/Background.png"));
 			pistolImg = ImageIO.read(GameDisplay.class.getResource("/resources/Pistol.png"));
 			pistolAmmoImg = ImageIO.read(GameDisplay.class.getResource("/resources/Pistol_Ammo_Icon.png"));
-			rifleImg = ImageIO.read(GameDisplay.class.getResource("/resources/Rifle.png"));			
+			rifleImg = ImageIO.read(GameDisplay.class.getResource("/resources/Rifle.png"));
+			rifleAmmoImg = ImageIO.read(GameDisplay.class.getResource("/resources/Rifle_Ammo_Icon.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
         
-        player = new Player(100, 100, 100, WeaponType.PISTOL, 100);
+        player = new Player(100, 100, 100, WeaponType.PISTOL, 50, 150);
         
-        InitializeGUI();
+        initializeGUIDetails();
     }
     
-    public void InitializeGUI()
+    public void initializeGUIDetails()
     {
     	pistolButton = new JButton();
     	rifleButton = new JButton();
@@ -81,20 +83,26 @@ public class GameDisplay extends JPanel implements ActionListener{
 		
 		Graphics2D g2 = (Graphics2D) g;
 		
-		DrawHUD(g2);
+		drawHUD(g2);
 		
 		drawPlayer(g2);
 	}
 	
-	public void DrawHUD(Graphics2D g2)
+	public void drawHUD(Graphics2D g2)
 	{
 	    width = this.getWidth();
 	    height = this.getHeight();
 		
-		//Background
-		//g2.drawImage(backgroundImg, 0, 0, this);
+		//g2.drawImage(backgroundImg, 0, 0, this); //Background image
 		
-		//Health bar
+	    drawHealthBar(g2);
+		
+	    drawAmmo(g2);
+		
+	    drawWeaponButtons(g2);
+	}
+	
+	public void drawHealthBar(Graphics2D g2) {
 		int healthBarX = width / 2;
 		int healthBarY = height - 80;
 		
@@ -113,17 +121,24 @@ public class GameDisplay extends JPanel implements ActionListener{
 		g2.setPaint(Color.BLACK);
 		g2.setFont(new Font("Roboto", Font.BOLD, 22));
 		g2.drawString(Integer.toString(player.getHealth()), healthBarX - 10, healthBarY + 70); // Health number below health bar
-		
-		//Pistol ammo
+	}
+
+	public void drawAmmo(Graphics2D g2) {
 		int ammoX = (width / 2) + 205;
 		int ammoY = height - 100;
-		g2.drawImage(pistolAmmoImg, ammoX, ammoY, this);
-		g2.drawString(Integer.toString(player.getAmmo()), ammoX + 75, ammoY + 50);
-		
+		BufferedImage ammoType = player.getWeapon().equals(WeaponType.PISTOL) ? pistolAmmoImg : rifleAmmoImg;
+		int ammoNum = player.getWeapon().equals(WeaponType.PISTOL) ? player.getPistolAmmo() : player.getRifleAmmo();
+		g2.drawImage(ammoType, ammoX, ammoY, this);
+		g2.drawString(Integer.toString(ammoNum), ammoX + 75, ammoY + 50);
+	}
+	
+	public void drawWeaponButtons(Graphics2D g2) {
     	int weaponX = width - 120;
     	int weaponY = height - 300;
     	pistolButton.setBounds(weaponX, weaponY, 75, 75);
-    	rifleButton.setBounds(weaponX, weaponY + 20 + 85, 75, 75);	
+    	rifleButton.setBounds(weaponX, weaponY + 105, 75, 75);
+    	g2.drawString("1", weaponX - 20, weaponY + 20);
+    	g2.drawString("2", weaponX - 20, weaponY + 125);
 	}
 	
 	public void drawPlayer(Graphics2D g2) {

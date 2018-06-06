@@ -2,14 +2,15 @@ package shooter.entities;
 
 public class Player {
 
-    int x, y, health, ammo;
+    int x, y, health, pistolAmmo, rifleAmmo;
     WeaponType weapon;
-    public Player(int x, int y, int health, WeaponType t, int ammo) {
+    public Player(int x, int y, int health, WeaponType t, int pistolAmmo, int rifleAmmo) {
         this.x = x;
         this.y = y;
         this.health = health;
         this.weapon = t;
-        this.ammo = ammo;
+        this.pistolAmmo = pistolAmmo;
+        this.rifleAmmo = rifleAmmo;
     }
 
     public int getX() {
@@ -36,12 +37,20 @@ public class Player {
         this.health = newHealth;
     }
 
-    public int getAmmo() {
-        return ammo;
+    public int getPistolAmmo() {
+        return pistolAmmo;
+    }
+    
+    public int getRifleAmmo() {
+        return rifleAmmo;
     }
 
-    public void setAmmo(int newAmmo) {
-        this.ammo = newAmmo;
+    public void setPistolAmmo(int newAmmo) {
+        this.pistolAmmo = newAmmo;
+    }
+    
+    public void setRifleAmmo(int newAmmo) {
+        this.rifleAmmo = newAmmo;
     }
     
     public WeaponType getWeapon() {
@@ -53,7 +62,7 @@ public class Player {
     }
     
     public String toString() {
-        return "x " + x + " y " + y + " health " + health + " weapon " + weapon.toString() + " ammo " + ammo;
+        return "x: " + x + " y: " + y + " health: " + health + " weapon: " + weapon.toString() + " pistol ammo: " + pistolAmmo + " rifle ammo: " + rifleAmmo;
     }
 
 }
