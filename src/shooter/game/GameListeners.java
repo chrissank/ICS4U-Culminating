@@ -5,7 +5,6 @@ import shooter.events.EventListener;
 import shooter.events.Listener;
 import shooter.events.types.GameInitiateEvent;
 import shooter.events.types.PreGameInitiateEvent;
-import shooter.events.types.RepaintEvent;
 
 public class GameListeners implements Listener {
     
@@ -17,18 +16,16 @@ public class GameListeners implements Listener {
     @EventListener
     public void onGamePreInit(PreGameInitiateEvent e) {
         main.thread = new GameThread();
+        main.in = new GameInput();
     }
     
     
     @EventListener
     public void onGameInit(GameInitiateEvent e) {
-        main.thread.start();
         main.frame.getLayout().show(main.gamedisplay.getParent(), "gamedisplay");
-    }
-
-    
-    @EventListener
-    public void onRepaint(RepaintEvent e) {
-        
+        main.frame.addKeyListener(main.in);
+        main.frame.setFocusable(true);
+        main.frame.requestFocus();
+        main.thread.start();
     }
 }
