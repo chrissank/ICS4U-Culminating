@@ -3,13 +3,15 @@ package shooter.entities;
 public class Player {
 
     int x, y, health, ammo;
+    double rotation;
     WeaponType weapon;
-    public Player(int x, int y, int health, WeaponType t, int ammo) {
+    public Player(int x, int y, int health, WeaponType t, int ammo, double rot) {
         this.x = x;
         this.y = y;
         this.health = health;
         this.weapon = t;
         this.ammo = ammo;
+        this.rotation = rot;
     }
 
     public int getX() {
@@ -52,8 +54,34 @@ public class Player {
         this.weapon = newWep;
     }
     
+    public double getRotation() {
+        return this.rotation;
+    }
+    
+    public void setRotation(double rot) {
+        this.rotation = rot;
+    }
+    
     public String toString() {
         return "x " + x + " y " + y + " health " + health + " weapon " + weapon.toString() + " ammo " + ammo;
     }
 
+    public void move(String dir) {
+        int speed = 10;
+        if(dir.equals("w")) {
+            x -= speed * Math.sin(rotation);
+            y += speed * Math.cos(rotation);
+        } else if(dir.equals("a")) {
+            x -= speed * Math.sin(rotation - 1.5708);
+            y += speed * Math.cos(rotation - 1.5708);
+        } else if(dir.equals("s")) {
+            x += speed * Math.sin(rotation);
+            y -= speed * Math.cos(rotation);
+            
+        } else if(dir.equals("d")) {
+
+            x += speed * Math.sin(rotation - 1.5708);
+            y -= speed * Math.cos(rotation - 1.5708);
+        }
+    }
 }

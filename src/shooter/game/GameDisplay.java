@@ -5,6 +5,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -32,7 +35,7 @@ public class GameDisplay extends JPanel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        player = new Player(100, 100, 100, WeaponType.PISTOL, 100);
+        player = new Player(100, 100, 100, WeaponType.PISTOL, 100, 0);
     }
     
     @Override
@@ -86,9 +89,10 @@ public class GameDisplay extends JPanel {
 	    Point m = MouseInfo.getPointerInfo().getLocation();
 	    float x = m.x - player.getX();
 	    float y = m.y - player.getY();
-	    double rot = Math.atan2(y, x);
+	    double rot = Math.atan2(y, x) - 1.5708;
+	    this.player.setRotation(rot);
 	    AffineTransform af = new AffineTransform();
-	    af.rotate(rot - 1.4, player.getX() + 34/2, player.getY() + 39/2);
+	    af.rotate(rot, player.getX() + 34/2, player.getY() + 39/2);
 	    g2.setTransform(af);
         g2.drawImage(playerImage, player.getX(), player.getY(), this);
         
