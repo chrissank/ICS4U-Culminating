@@ -83,6 +83,14 @@ public class GameDisplay extends JPanel {
 	}
 	
 	public void drawPlayer(Graphics2D g2) {
-	    
+	    Point m = MouseInfo.getPointerInfo().getLocation();
+	    float x = m.x - player.getX();
+	    float y = m.y - player.getY();
+	    double rot = Math.atan2(y, x);
+	    AffineTransform af = new AffineTransform();
+	    af.rotate(rot - 1.4, player.getX() + 34/2, player.getY() + 39/2);
+	    g2.setTransform(af);
+        g2.drawImage(playerImage, player.getX(), player.getY(), this);
+        
 	}
 }

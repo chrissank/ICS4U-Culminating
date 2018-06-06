@@ -5,7 +5,6 @@ import shooter.events.Listener;
 import shooter.events.types.InitiateEvent;
 import shooter.game.GameDisplay;
 import shooter.menu.ShooterMenu;
-import shooter.music.MusicManager;
 
 public class InitializeListener implements Listener {
 
@@ -20,11 +19,11 @@ public class InitializeListener implements Listener {
         //playClip();
         main.frame = new GameFrame();
         main.menu = new ShooterMenu();
-        main.gamedisplay = new GameDisplay();
+        main.gamedisplay = new GameDisplay(); // causes the game to lag on load (textures)
         main.frame.add(main.menu, "menu");
         main.frame.add(main.gamedisplay, "gamedisplay");
         main.frame.lay.show(main.menu.getParent(), "menu");
-        MusicManager.playClip("bomb_x");
+        //MusicManager.playClip("bomb_x");
     }
 
 }

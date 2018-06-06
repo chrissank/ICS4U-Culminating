@@ -5,6 +5,7 @@ import shooter.events.EventListener;
 import shooter.events.Listener;
 import shooter.events.types.GameInitiateEvent;
 import shooter.events.types.PreGameInitiateEvent;
+import shooter.events.types.RepaintEvent;
 
 public class GameListeners implements Listener {
     
@@ -25,4 +26,9 @@ public class GameListeners implements Listener {
         main.frame.getLayout().show(main.gamedisplay.getParent(), "gamedisplay");
     }
 
+    
+    @EventListener
+    public void onRepaint(RepaintEvent e) {
+        
+    }
 }
