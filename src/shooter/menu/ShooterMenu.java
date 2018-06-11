@@ -1,6 +1,7 @@
 package shooter.menu;
 
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,7 +19,8 @@ import shooter.events.types.PreGameInitiateEvent;
 
 public class ShooterMenu extends JPanel implements ActionListener {
 
-	JLabel title = new JLabel("SHOOTER GAME (Name TBD)");
+    private static final long serialVersionUID = 1L;
+    JLabel title = new JLabel("SHOOTER GAME (Name TBD)");
 	JButton play = new JButton("Play");
 	JButton quit = new JButton("Quit");
 	JPanel buttonsPanel = new JPanel();
@@ -66,7 +68,7 @@ public class ShooterMenu extends JPanel implements ActionListener {
 			int diff = 0;
             if(mediumDifficulty.isSelected()) diff += 1;
             if(hardDifficulty.isSelected()) diff += 2;
-            EventHandler.callEvent(new PreGameInitiateEvent(diff, Main.getInstance().gamedisplay, Main.getInstance().frame.getWidth(), Main.getInstance().frame.getHeight()));
+            EventHandler.callEvent(new PreGameInitiateEvent(diff, Main.getInstance().gamedisplay, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height));
 		}
 	}
 	

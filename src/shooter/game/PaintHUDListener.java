@@ -4,7 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.Toolkit;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -54,10 +53,8 @@ public class PaintHUDListener implements Listener {
             ex.printStackTrace();
         }
         this.player = LevelManager.getPlayer();
-        this.width = Toolkit.getDefaultToolkit().getScreenSize().width;
-        this.height = Toolkit.getDefaultToolkit().getScreenSize().height;
-        System.out.println(width);
-        System.out.println(height);
+        this.width = e.getWidth();
+        this.height = e.getHeight();
         initializeGUIDetails();
     }
 
