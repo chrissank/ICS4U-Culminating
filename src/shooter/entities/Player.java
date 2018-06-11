@@ -76,7 +76,6 @@ public class Player {
     }
     
     public void move(String dir) {
-        System.out.println(dir);
         int speed = 10;
         if(dir.equals("w")) {
             x -= speed * Math.sin(rotation);
@@ -91,5 +90,9 @@ public class Player {
             x += speed * Math.sin(rotation - 1.5708);
             y -= speed * Math.cos(rotation - 1.5708);
         }
+    }
+    
+    public void shoot() {
+        
     }
 }

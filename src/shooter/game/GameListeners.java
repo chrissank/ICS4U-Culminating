@@ -5,6 +5,7 @@ import shooter.events.EventListener;
 import shooter.events.Listener;
 import shooter.events.types.GameInitiateEvent;
 import shooter.events.types.PreGameInitiateEvent;
+import shooter.level.LevelManager;
 
 public class GameListeners implements Listener {
     
@@ -17,6 +18,7 @@ public class GameListeners implements Listener {
     public void onGamePreInit(PreGameInitiateEvent e) {
         main.thread = new GameThread();
         main.in = new GameInput();
+        LevelManager.init();
     }
     
     
