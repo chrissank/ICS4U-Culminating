@@ -71,14 +71,10 @@ public class Player {
         this.rotation = rot;
     }
     
-    public void move(String string)
-    {
-    	
-    }
-    
     public String toString() {
         return "x: " + x + " y: " + y + " health: " + health + " weapon: " + weapon.toString() + " pistol ammo: " + pistolAmmo + " rifle ammo: " + rifleAmmo;
     }
+    
     public void move(String dir) {
         System.out.println(dir);
         int speed = 10;
