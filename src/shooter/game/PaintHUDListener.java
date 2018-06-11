@@ -115,6 +115,8 @@ public class PaintHUDListener implements Listener {
     {
         pistolButton = new JButton();
         rifleButton = new JButton();
+        pistolButton.setFocusable(false);
+        rifleButton.setFocusable(false);
         pistolButton.addActionListener((e) -> {
             player.setWeapon(WeaponType.PISTOL);
             pistolButton.setBackground(Color.GREEN);

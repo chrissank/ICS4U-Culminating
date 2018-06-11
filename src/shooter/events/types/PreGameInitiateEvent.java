@@ -11,6 +11,8 @@ public class PreGameInitiateEvent extends Event {
     private int width, height;
     public PreGameInitiateEvent(int difficulty, JPanel panel, int width, int height) {
         diff = difficulty;
+        this.width = width;
+        this.height = height;
     }
     
     public int getDifficulty() {
@@ -22,7 +24,7 @@ public class PreGameInitiateEvent extends Event {
     }
     
     public int getWidth() {
-        return this.height;
+        return this.width;
     }
     
     public int getHeight() {
