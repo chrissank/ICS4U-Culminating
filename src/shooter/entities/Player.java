@@ -79,5 +79,21 @@ public class Player {
     public String toString() {
         return "x: " + x + " y: " + y + " health: " + health + " weapon: " + weapon.toString() + " pistol ammo: " + pistolAmmo + " rifle ammo: " + rifleAmmo;
     }
-
+    public void move(String dir) {
+        System.out.println(dir);
+        int speed = 10;
+        if(dir.equals("w")) {
+            x -= speed * Math.sin(rotation);
+            y += speed * Math.cos(rotation);
+        } else if(dir.equals("a")) {
+            x -= speed * Math.sin(rotation - 1.5708);
+            y += speed * Math.cos(rotation - 1.5708);
+        } else if(dir.equals("s")) {
+            x += speed * Math.sin(rotation);
+            y -= speed * Math.cos(rotation);
+        } else if(dir.equals("d")) {
+            x += speed * Math.sin(rotation - 1.5708);
+            y -= speed * Math.cos(rotation - 1.5708);
+        }
+    }
 }

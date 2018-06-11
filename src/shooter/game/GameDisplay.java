@@ -52,7 +52,6 @@ public class GameDisplay extends JPanel implements ActionListener{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        
         initializeGUIDetails();
     }
     
@@ -72,7 +71,7 @@ public class GameDisplay extends JPanel implements ActionListener{
     	this.add(pistolButton);
     	this.add(rifleButton);
     	this.setLayout(null);
-        player = new Player(100, 100, 100, WeaponType.PISTOL, 50, 150, 0);
+        player = new Player(100, 100, 100, WeaponType.PISTOL, 50, 150, 0
     }
     
 	public void paint(Graphics g)
