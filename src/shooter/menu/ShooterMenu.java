@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import shooter.Main;
 import shooter.events.EventHandler;
 import shooter.events.types.PreGameInitiateEvent;
 
@@ -65,7 +66,7 @@ public class ShooterMenu extends JPanel implements ActionListener {
 			int diff = 0;
             if(mediumDifficulty.isSelected()) diff += 1;
             if(hardDifficulty.isSelected()) diff += 2;
-            EventHandler.callEvent(new PreGameInitiateEvent(diff));
+            EventHandler.callEvent(new PreGameInitiateEvent(diff, Main.getInstance().gamedisplay, Main.getInstance().frame.getWidth(), Main.getInstance().frame.getHeight()));
 		}
 	}
 	

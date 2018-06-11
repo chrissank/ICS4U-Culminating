@@ -14,5 +14,7 @@ public class RepaintEvent extends Event {
     public Graphics2D getGraphics() {
         return this.g2;
     }
+    
+    
 
 }

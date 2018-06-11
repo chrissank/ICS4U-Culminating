@@ -9,7 +9,8 @@ import shooter.game.GameDisplay;
 import shooter.game.GameInput;
 import shooter.game.GameListeners;
 import shooter.game.GameThread;
-import shooter.game.RepaintListener;
+import shooter.game.PaintHUDListener;
+import shooter.game.PaintPlayerListener;
 import shooter.menu.ShooterMenu;
 
 
@@ -27,7 +28,6 @@ public class Main {
     public GameThread thread;
     public GameInput in;
     
-    //Main.class.getResourceAsStream("/resources/strings.txt"))
     public static void main(String[] args) throws IOException {
         instance = new Main();
         instance.registerListeners();
@@ -43,8 +43,9 @@ public class Main {
      */
     public void registerListeners() {
         EventHandler.registerListener(new InitializeListener());
-        EventHandler.registerListener(new RepaintListener());
         EventHandler.registerListener(new GameListeners());
+        EventHandler.registerListener(new PaintHUDListener());
+        EventHandler.registerListener(new PaintPlayerListener());
         
         EventHandler.registerListener(new CoreListeners()); // Must be last
     }
