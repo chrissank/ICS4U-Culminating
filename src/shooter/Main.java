@@ -28,7 +28,6 @@ public class Main {
     public GameThread thread;
     public GameInput in;
     
-    //Main.class.getResourceAsStream("/resources/strings.txt"))
     public static void main(String[] args) throws IOException {
         instance = new Main();
         instance.registerListeners();
@@ -44,9 +43,9 @@ public class Main {
      */
     public void registerListeners() {
         EventHandler.registerListener(new InitializeListener());
+        EventHandler.registerListener(new GameListeners());
         EventHandler.registerListener(new PaintHUDListener());
         EventHandler.registerListener(new PaintPlayerListener());
-        EventHandler.registerListener(new GameListeners());
         
         EventHandler.registerListener(new CoreListeners()); // Must be last
     }

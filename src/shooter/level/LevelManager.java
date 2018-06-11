@@ -14,6 +14,7 @@ public class LevelManager {
     
     public static void init() {
         player = new Player(100, 100, 100, WeaponType.PISTOL, 50, 150, 0);
+        System.out.println(player.toString());
     }
     
     public static Player getPlayer() {

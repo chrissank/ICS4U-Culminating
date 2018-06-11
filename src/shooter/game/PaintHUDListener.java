@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Toolkit;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -25,7 +26,6 @@ public class PaintHUDListener implements Listener {
 
     Player player;
     Main main;
-    BufferedImage playerImage;
     BufferedImage backgroundImg;
     BufferedImage pistolImg;
     BufferedImage pistolAmmoImg;
@@ -39,14 +39,12 @@ public class PaintHUDListener implements Listener {
     int height;
 
     public PaintHUDListener() {
-        this.player = LevelManager.getPlayer();
         this.main = Main.getInstance();
     }
-    
+
     @EventListener
     public void onGameStart(PreGameInitiateEvent e) {
         try {
-            playerImage = ImageIO.read(PaintHUDListener.class.getResource("/resources/player_1.png"));
             backgroundImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Background.png"));
             pistolImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Pistol.png"));
             pistolAmmoImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Pistol_Ammo_Icon.png"));
@@ -55,6 +53,11 @@ public class PaintHUDListener implements Listener {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        this.player = LevelManager.getPlayer();
+        this.width = Toolkit.getDefaultToolkit().getScreenSize().width;
+        this.height = Toolkit.getDefaultToolkit().getScreenSize().height;
+        System.out.println(width);
+        System.out.println(height);
         initializeGUIDetails();
     }
 
@@ -65,13 +68,10 @@ public class PaintHUDListener implements Listener {
 
     public void drawHUD(Graphics2D g2)
     {
-
         //g2.drawImage(backgroundImg, 0, 0, this); //Background image
 
         drawHealthBar(g2);
-
         drawAmmo(g2);
-
         drawWeaponButtons(g2);
     }
 
@@ -113,23 +113,31 @@ public class PaintHUDListener implements Listener {
         g2.drawString("1", weaponX - 20, weaponY + 20);
         g2.drawString("2", weaponX - 20, weaponY + 125);
     }
-    
+
     public void initializeGUIDetails()
     {
         pistolButton = new JButton();
         rifleButton = new JButton();
-        pistolButton.addActionListener(this);
-        rifleButton.addActionListener(this);
+        pistolButton.addActionListener((e) -> {
+            player.setWeapon(WeaponType.PISTOL);
+            pistolButton.setBackground(Color.GREEN);
+            rifleButton.setBackground(Color.WHITE);
+        });
+        rifleButton.addActionListener((e) -> {
+            player.setWeapon(WeaponType.RIFLE);
+            pistolButton.setBackground(Color.WHITE);
+            rifleButton.setBackground(Color.GREEN);
+        });
         pistolButton.setActionCommand("Pistol");
         rifleButton.setActionCommand("Rifle");
         pistolButton.setBackground(Color.GREEN);
-        
+
         pistolButton.setIcon(new ImageIcon(pistolImg));
         rifleButton.setIcon(new ImageIcon(rifleImg));
-        
-        Main.getInstance().gamedisplay.add(pistolButton);
-        this.add(rifleButton);
-        this.setLayout(null);
+
+        main.gamedisplay.add(pistolButton);
+        main.gamedisplay.add(rifleButton);
+        main.gamedisplay.setLayout(null);
     }
 
 }
