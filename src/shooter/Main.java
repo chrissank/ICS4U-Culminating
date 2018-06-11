@@ -6,6 +6,7 @@ import shooter.events.CoreListeners;
 import shooter.events.EventHandler;
 import shooter.events.types.InitiateEvent;
 import shooter.game.GameDisplay;
+import shooter.game.GameInput;
 import shooter.game.GameListeners;
 import shooter.game.GameThread;
 import shooter.game.RepaintListener;
@@ -24,6 +25,7 @@ public class Main {
     public ShooterMenu menu;
     public GameDisplay gamedisplay;
     public GameThread thread;
+    public GameInput in;
     
     //Main.class.getResourceAsStream("/resources/strings.txt"))
     public static void main(String[] args) throws IOException {

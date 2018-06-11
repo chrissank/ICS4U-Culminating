@@ -3,14 +3,16 @@ package shooter.entities;
 public class Player {
 
     int x, y, health, pistolAmmo, rifleAmmo;
+    double rotation;
     WeaponType weapon;
-    public Player(int x, int y, int health, WeaponType t, int pistolAmmo, int rifleAmmo) {
+    public Player(int x, int y, int health, WeaponType t, int pistolAmmo, int rifleAmmo, double rot) {
         this.x = x;
         this.y = y;
         this.health = health;
         this.weapon = t;
         this.pistolAmmo = pistolAmmo;
         this.rifleAmmo = rifleAmmo;
+        this.rotation = rot;
     }
 
     public int getX() {
@@ -42,7 +44,7 @@ public class Player {
     }
     
     public int getRifleAmmo() {
-        return rifleAmmo;
+    	return rifleAmmo;
     }
 
     public void setPistolAmmo(int newAmmo) {
@@ -50,7 +52,7 @@ public class Player {
     }
     
     public void setRifleAmmo(int newAmmo) {
-        this.rifleAmmo = newAmmo;
+    	this.rifleAmmo = newAmmo;
     }
     
     public WeaponType getWeapon() {
@@ -59,6 +61,19 @@ public class Player {
     
     public void setWeapon(WeaponType newWep) {
         this.weapon = newWep;
+    }
+    
+    public double getRotation() {
+        return this.rotation;
+    }
+    
+    public void setRotation(double rot) {
+        this.rotation = rot;
+    }
+    
+    public void move(String string)
+    {
+    	
     }
     
     public String toString() {

@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
@@ -52,8 +53,6 @@ public class GameDisplay extends JPanel implements ActionListener{
 			e.printStackTrace();
 		}
         
-        player = new Player(100, 100, 100, WeaponType.PISTOL, 50, 150);
-        
         initializeGUIDetails();
     }
     
@@ -73,6 +72,7 @@ public class GameDisplay extends JPanel implements ActionListener{
     	this.add(pistolButton);
     	this.add(rifleButton);
     	this.setLayout(null);
+        player = new Player(100, 100, 100, WeaponType.PISTOL, 50, 150, 0);
     }
     
 	public void paint(Graphics g)
@@ -145,9 +145,10 @@ public class GameDisplay extends JPanel implements ActionListener{
 	    Point m = MouseInfo.getPointerInfo().getLocation();
 	    float x = m.x - player.getX();
 	    float y = m.y - player.getY();
-	    double rot = Math.atan2(y, x);
+	    double rot = Math.atan2(y, x) - 1.5708;
+	    this.player.setRotation(rot);
 	    AffineTransform af = new AffineTransform();
-	    af.rotate(rot - 1.4, player.getX() + 34/2, player.getY() + 39/2);
+	    af.rotate(rot, player.getX() + 34/2, player.getY() + 39/2);
 	    g2.setTransform(af);
         g2.drawImage(playerImage, player.getX(), player.getY(), this);
         
