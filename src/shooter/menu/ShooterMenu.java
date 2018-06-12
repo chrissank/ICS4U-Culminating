@@ -1,6 +1,7 @@
 package shooter.menu;
 
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,8 +23,18 @@ public class ShooterMenu extends JPanel implements ActionListener {
     private static final long serialVersionUID = 1L;
     JLabel title = new JLabel("SHOOTER GAME (Name TBD)");
 	JButton play = new JButton("Play");
+	JButton controls = new JButton("Controls");
 	JButton quit = new JButton("Quit");
 	JPanel buttonsPanel = new JPanel();
+	
+	JLabel weaponOne = new JLabel("(1) - to use Pistol");
+	JLabel weaponTwo  = new JLabel("(2) - to use Rifle");
+	JLabel forwards = new JLabel("(W) - to move forward towards cursor");
+	JLabel backwards = new JLabel("(S) - to move backward from cursor");
+	JLabel left = new JLabel("(A) - to move left of cursor");
+	JLabel right = new JLabel("(D) - to move right of cursor");
+	JLabel shoot = new JLabel("(SPACEBAR) - to shoot");
+	JPanel controlsPanel = new JPanel();
 	
 	JRadioButton easyDifficulty = new JRadioButton("Easy", true);
 	JRadioButton mediumDifficulty = new JRadioButton("Medium", false);
@@ -32,13 +43,18 @@ public class ShooterMenu extends JPanel implements ActionListener {
 	JPanel confirmPlayPanel = new JPanel();
 	JButton confirmPlay = new JButton("Go!");
 	
+	JPanel bottomSection = new JPanel();
+	
+	Font titleFont = new Font("Roboto", Font.ITALIC, 50);
+	Font defaultFont = new Font("Roboto", Font.PLAIN, 15);
+	
 	public ShooterMenu() {	
 	
 		InitializeGuiDetails();
 		
 		this.add(title);
 		this.add(buttonsPanel);
-		this.add(confirmPlayPanel);
+		this.add(bottomSection);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 	}
@@ -46,7 +62,13 @@ public class ShooterMenu extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getActionCommand().equals("Play"))
 		{
-			confirmPlayPanel.setVisible(true);
+			confirmPlayPanel.setVisible(!confirmPlayPanel.isVisible());
+			repaint();
+		}
+		
+		else if (arg0.getActionCommand().equals("Controls"))
+		{
+			controlsPanel.setVisible(!controlsPanel.isVisible());
 			repaint();
 		}
 		
@@ -72,30 +94,56 @@ public class ShooterMenu extends JPanel implements ActionListener {
 		}
 	}
 	
-	public void InitializeGuiDetails() {
-		title.setFont(new Font("Roboto", Font.ITALIC, 50));
+	private void InitializeGuiDetails() {
+		title.setFont(titleFont);
 		title.setAlignmentX(CENTER_ALIGNMENT);
 		
-		play.addActionListener(this);
-		quit.addActionListener(this);
-		play.setActionCommand("Play");
-		quit.setActionCommand("Quit");
-		buttonsPanel.add(play);
-		buttonsPanel.add(quit);
-		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+		setMainButtons(play, "Play");
+		setMainButtons(controls, "Controls");
+		setMainButtons(quit, "Quit");
+		buttonsPanel.setLayout(new GridLayout(1, 3, 50, 50));
 		buttonsPanel.setAlignmentX(CENTER_ALIGNMENT);
 		
 		confirmPlay.addActionListener(this);
 		confirmPlay.setActionCommand("Go");
-		difficultiesGroup.add(easyDifficulty);
-		difficultiesGroup.add(mediumDifficulty);
-		difficultiesGroup.add(hardDifficulty);
-		confirmPlayPanel.add(easyDifficulty);
-		confirmPlayPanel.add(mediumDifficulty);
-		confirmPlayPanel.add(hardDifficulty);
+		setConfirmPlayPanelDetails(easyDifficulty);
+		setConfirmPlayPanelDetails(mediumDifficulty);
+		setConfirmPlayPanelDetails(hardDifficulty);
 		confirmPlayPanel.add(confirmPlay);
+		confirmPlay.setFont(defaultFont);
 		confirmPlayPanel.setLayout(new BoxLayout(confirmPlayPanel, BoxLayout.Y_AXIS));
-		confirmPlayPanel.setAlignmentX(CENTER_ALIGNMENT);
-		confirmPlayPanel.setVisible(false);
+		confirmPlayPanel.setVisible(false);	
+		
+		setControlLabels(weaponOne);
+		setControlLabels(weaponTwo);
+		setControlLabels(forwards);
+		setControlLabels(backwards);
+		setControlLabels(left);
+		setControlLabels(right);
+		setControlLabels(shoot);
+		controlsPanel.setLayout(new BoxLayout(controlsPanel, BoxLayout.Y_AXIS));
+		controlsPanel.setVisible(false);
+		
+		bottomSection.add(confirmPlayPanel);
+		bottomSection.add(controlsPanel);
+		bottomSection.setLayout(new BoxLayout(bottomSection, BoxLayout.X_AXIS));
+	}
+	
+	private void setMainButtons(JButton button, String actionCommand) {
+		button.setFont(defaultFont);
+		button.addActionListener(this);
+		button.setActionCommand(actionCommand);
+		buttonsPanel.add(button);
+	}
+	
+	private void setConfirmPlayPanelDetails(JRadioButton radioButton) {
+		radioButton.setFont(defaultFont);
+		difficultiesGroup.add(radioButton);
+		confirmPlayPanel.add(radioButton);
+	}
+	
+	private void setControlLabels(JLabel label) {
+		controlsPanel.add(label);
+		label.setFont(defaultFont);
 	}
 }
