@@ -4,10 +4,11 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -37,6 +38,8 @@ public class PaintHUDListener implements Listener {
 
     int width;
     int height;
+    
+    Color[] redColour = new Color[4];
 
     public PaintHUDListener() {
         this.main = Main.getInstance();
@@ -56,6 +59,12 @@ public class PaintHUDListener implements Listener {
         this.player = LevelManager.getPlayer();
         this.width = e.getWidth();
         this.height = e.getHeight();
+        
+        redColour[0] = new Color(181, 17, 17);
+        redColour[1] = new Color(192, 19, 19);
+        redColour[2] = new Color(155, 11, 11);
+        redColour[3] = new Color(183, 43, 43);
+        
         initializeGUIDetails();
     }
 
@@ -70,11 +79,16 @@ public class PaintHUDListener implements Listener {
         drawAmmo(g2);
         drawWeaponButtons(g2);
         
+        //IF ZOMBIE DIES
+        generateBloodSplatter(g2, 454, 876);
+        
         //BACKGROUND IMAGE NOT WORKING AT THE MOMENT
         //g2.drawImage(backgroundImg, 0, 0, this);
     }
+    
 
-    public void drawHealthBar(Graphics2D g2) {
+   
+    private void drawHealthBar(Graphics2D g2) {
         int healthBarX = width / 2;
         int healthBarY = height - 80;
 
@@ -95,7 +109,8 @@ public class PaintHUDListener implements Listener {
         g2.drawString(Integer.toString(player.getHealth()), healthBarX - 10, healthBarY + 70); // Health number below health bar
     }
 
-    public void drawAmmo(Graphics2D g2) {
+   
+    private void drawAmmo(Graphics2D g2) {
         int ammoX = (width / 2) + 205;
         int ammoY = height - 100;
         BufferedImage ammoType = player.getWeapon().equals(WeaponType.PISTOL) ? pistolAmmoImg : rifleAmmoImg;
@@ -104,7 +119,8 @@ public class PaintHUDListener implements Listener {
         g2.drawString(Integer.toString(ammoNum), ammoX + 75, ammoY + 50);
     }
 
-    public void drawWeaponButtons(Graphics2D g2) {
+   
+    private void drawWeaponButtons(Graphics2D g2) {
         int weaponX = width - 120;
         int weaponY = height - 300;
         pistolButton.setBounds(weaponX, weaponY, 75, 75);
@@ -113,7 +129,40 @@ public class PaintHUDListener implements Listener {
         g2.drawString("2", weaponX - 20, weaponY + 125);
     }
 
-    public void initializeGUIDetails()
+    private void generateBloodSplatter(Graphics2D g2, int x, int y) {
+    	Random rand = new Random();
+    	int numberOfSplats = (rand.nextInt(10) % 4) + 1;
+    	int sizeOfSplat = rand.nextInt(10) + 10;
+    	int colorIndex = rand.nextInt(10) % 4;
+    	
+    	for (int i = 0; i < numberOfSplats; i++) {
+        	int randomSpaceX = (rand.nextInt(50) % 10) + 1;
+        	int randomSpaceY = (rand.nextInt(50) % 10) + 1;
+    		drawBloodSplat(g2, x, y, sizeOfSplat, colorIndex, randomSpaceX, randomSpaceY);
+    	}
+    }
+    
+    private void drawBloodSplat(Graphics2D g2, int x, int y, int sizeOfSplat, int colorIndex, int randomSpaceX, int randomSpaceY) {
+    	
+    	if (getRandomBoolean() == true) {
+    		x += randomSpaceX;
+    		y -= randomSpaceY;
+    	}
+    	
+    	else {
+    		x -= randomSpaceX;
+    		y += randomSpaceY;
+    	}
+    	
+    	g2.setPaint(redColour[colorIndex]);
+    	g2.fill(new Ellipse2D.Double(x, y, sizeOfSplat, sizeOfSplat));
+	}
+    
+    private boolean getRandomBoolean() {
+    	return Math.random() < 0.5;
+    }
+
+	public void initializeGUIDetails()
     {
         pistolButton = new JButton();
         rifleButton = new JButton();
