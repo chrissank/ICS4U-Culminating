@@ -60,8 +60,8 @@ public class PaintHUDListener implements Listener {
         this.width = e.getWidth();
         this.height = e.getHeight();
         
-        redColour[0] = new Color(181, 17, 17);
-        redColour[1] = new Color(192, 19, 19);
+        redColour[0] = new Color(216, 55, 55);
+        redColour[1] = new Color(206, 17, 17);
         redColour[2] = new Color(155, 11, 11);
         redColour[3] = new Color(183, 43, 43);
         
