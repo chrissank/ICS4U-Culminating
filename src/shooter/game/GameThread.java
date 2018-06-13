@@ -1,6 +1,7 @@
 package shooter.game;
 
-import shooter.Main;
+import shooter.events.EventHandler;
+import shooter.events.types.GameTickEvent;
 
 /*
  * Heartbeat of the ingame - will try to keep to 40 ticks per second -- 25ms
@@ -8,12 +9,18 @@ import shooter.Main;
 public class GameThread extends Thread {
     
     public static boolean STATUS = true;
+    public static int time = 0;
+    int tick;
     
     public void run() {
+        tick = 0;
         while(STATUS) {
-            Main.getInstance().gamedisplay.repaint();
-            
-            
+            EventHandler.callEvent(new GameTickEvent(tick));
+            tick++;
+            if(tick == 41) {
+                time++;
+                tick = 0;
+            }
             try {
                 Thread.sleep(1000 / 40);
             } catch (InterruptedException e) {

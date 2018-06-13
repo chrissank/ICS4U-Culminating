@@ -78,6 +78,7 @@ public class PaintHUDListener implements Listener {
         drawHealthBar(g2);
         drawAmmo(g2);
         drawWeaponButtons(g2);
+        paintButtons(g2);
         
         //IF ZOMBIE DIES
         generateBloodSplatter(g2, 454, 876);
@@ -85,10 +86,18 @@ public class PaintHUDListener implements Listener {
         //BACKGROUND IMAGE NOT WORKING AT THE MOMENT
         //g2.drawImage(backgroundImg, 0, 0, this);
     }
-    
 
-   
-    private void drawHealthBar(Graphics2D g2) {
+    private void paintButtons(Graphics2D g2) {
+        if(player.getWeapon() == WeaponType.PISTOL) {
+            pistolButton.setBackground(Color.GREEN);
+            rifleButton.setBackground(Color.WHITE);
+        } else {
+            pistolButton.setBackground(Color.WHITE);
+            rifleButton.setBackground(Color.GREEN);
+        }
+    }
+
+    public void drawHealthBar(Graphics2D g2) {
         int healthBarX = width / 2;
         int healthBarY = height - 80;
 
@@ -109,8 +118,7 @@ public class PaintHUDListener implements Listener {
         g2.drawString(Integer.toString(player.getHealth()), healthBarX - 10, healthBarY + 70); // Health number below health bar
     }
 
-   
-    private void drawAmmo(Graphics2D g2) {
+    public void drawAmmo(Graphics2D g2) {
         int ammoX = (width / 2) + 205;
         int ammoY = height - 100;
         BufferedImage ammoType = player.getWeapon().equals(WeaponType.PISTOL) ? pistolAmmoImg : rifleAmmoImg;
@@ -119,8 +127,7 @@ public class PaintHUDListener implements Listener {
         g2.drawString(Integer.toString(ammoNum), ammoX + 75, ammoY + 50);
     }
 
-   
-    private void drawWeaponButtons(Graphics2D g2) {
+    public void drawWeaponButtons(Graphics2D g2) {
         int weaponX = width - 120;
         int weaponY = height - 300;
         pistolButton.setBounds(weaponX, weaponY, 75, 75);
@@ -170,13 +177,9 @@ public class PaintHUDListener implements Listener {
         rifleButton.setFocusable(false);
         pistolButton.addActionListener((e) -> {
             player.setWeapon(WeaponType.PISTOL);
-            pistolButton.setBackground(Color.GREEN);
-            rifleButton.setBackground(Color.WHITE);
         });
         rifleButton.addActionListener((e) -> {
             player.setWeapon(WeaponType.RIFLE);
-            pistolButton.setBackground(Color.WHITE);
-            rifleButton.setBackground(Color.GREEN);
         });
         pistolButton.setActionCommand("Pistol");
         rifleButton.setActionCommand("Rifle");

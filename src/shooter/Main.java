@@ -6,9 +6,9 @@ import shooter.events.CoreListeners;
 import shooter.events.EventHandler;
 import shooter.events.types.InitiateEvent;
 import shooter.game.GameDisplay;
-import shooter.game.GameInput;
 import shooter.game.GameListeners;
 import shooter.game.GameThread;
+import shooter.game.PaintEntityListener;
 import shooter.game.PaintHUDListener;
 import shooter.game.PaintPlayerListener;
 import shooter.menu.ShooterMenu;
@@ -26,7 +26,6 @@ public class Main {
     public ShooterMenu menu;
     public GameDisplay gamedisplay;
     public GameThread thread;
-    public GameInput in;
     
     public static void main(String[] args) throws IOException {
         instance = new Main();
@@ -46,6 +45,7 @@ public class Main {
         EventHandler.registerListener(new GameListeners());
         EventHandler.registerListener(new PaintHUDListener());
         EventHandler.registerListener(new PaintPlayerListener());
+        EventHandler.registerListener(new PaintEntityListener());
         
         EventHandler.registerListener(new CoreListeners()); // Must be last
     }

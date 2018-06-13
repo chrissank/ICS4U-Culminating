@@ -13,6 +13,7 @@ import shooter.Main;
 import shooter.entities.Player;
 import shooter.events.EventListener;
 import shooter.events.Listener;
+import shooter.events.types.GameTickEvent;
 import shooter.events.types.PreGameInitiateEvent;
 import shooter.events.types.RepaintEvent;
 import shooter.level.LevelManager;
@@ -36,12 +37,15 @@ public class PaintPlayerListener implements Listener {
         this.player = LevelManager.getPlayer();
     }
 
+    @EventListener
+    public void onGameTick(GameTickEvent e) {
+    }
 
     @EventListener
     public void onPaint(RepaintEvent e) {
         drawPlayer(e.getGraphics());
     }
-
+    
     public void drawPlayer(Graphics2D g2) {
         Point m = MouseInfo.getPointerInfo().getLocation();
         float x = m.x - player.getX();

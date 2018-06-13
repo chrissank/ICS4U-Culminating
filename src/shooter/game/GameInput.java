@@ -1,32 +1,21 @@
 package shooter.game;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import shooter.Main;
-import shooter.level.LevelManager;
+import javax.swing.AbstractAction;
 
-public class GameInput implements KeyListener {
-
-    Main main;
-    public GameInput() {
-        this.main = Main.getInstance();
-    }
+public class GameInput extends AbstractAction {
+    private static final long serialVersionUID = 1L;
     
-    @Override
-    public void keyPressed(KeyEvent e) {
-        String in = KeyEvent.getKeyText(e.getKeyCode()).toLowerCase();
-        if(in.equals("w") || in.equals("a") || in.equals("s") || in.equals("d")) {
-            LevelManager.getPlayer().move(in);
-        }
+    ActionListener e;
+    public GameInput(ActionListener e) {
+        this.e = e;
     }
 
     @Override
-    public void keyReleased(KeyEvent arg0) {}
-
-    @Override
-    public void keyTyped(KeyEvent arg0) {}
-
-    
+    public void actionPerformed(ActionEvent e) {
+        this.e.actionPerformed(e);
+    }
 
 }

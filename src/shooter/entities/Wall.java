@@ -4,16 +4,31 @@ import javafx.geometry.Rectangle2D;
 
 public class Wall {
 
-    int x1, x2, y1, y2;
-    public Wall(int x1, int y1, int x2, int y2) {
-        this.x1 = x1;
-        this.x2 = x2;
-        this.y1 = y1;
-        this.y2 = y2;
+    int x, y, width, height;
+    public Wall(int x1, int y1, int width, int height) {
+        this.x = x1;
+        this.y = y1;
+        this.width = width;
+        this.height = height;
+    }
+    
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+    
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
     
     public Rectangle2D getBounds() {
-        Rectangle2D r = new Rectangle2D(x1, y2, x1-x2, y1-y2);
-        return r;
+        return new Rectangle2D(x, y, width, height);
     }
 }
