@@ -4,9 +4,15 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+
+import shooter.Main;
 import shooter.entities.Bullet;
+import shooter.entities.Enemy;
 import shooter.entities.Wall;
 import shooter.entities.WeaponType;
 import shooter.events.EventListener;
@@ -20,12 +26,18 @@ public class PaintEntityListener implements Listener {
     AffineTransform blank;
     ArrayList<Integer> toRemove;
     int width, height;
+    BufferedImage playerImage;
     
     public PaintEntityListener() {
         this.width = Toolkit.getDefaultToolkit().getScreenSize().width + 2;
         this.height = Toolkit.getDefaultToolkit().getScreenSize().height + 2;
         toRemove = new ArrayList<>();
         blank = new AffineTransform();
+        try {
+            playerImage = ImageIO.read(PaintEntityListener.class.getResource("/resources/Zombie.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     
     @EventListener
@@ -37,7 +49,7 @@ public class PaintEntityListener implements Listener {
     public void onPaint(RepaintEvent e) {
         paintBullets(e.getGraphics());
         paintWalls(e.getGraphics());
-        e.getGraphics().setColor(new Color(10, 10, 40));
+        paintEnemy(e.getGraphics());
     }
     
     private void checkCollision() {
@@ -53,13 +65,22 @@ public class PaintEntityListener implements Listener {
         toRemove.clear();
     }
 
-    private void paintWalls(Graphics2D g2) {
+    public void paintWalls(Graphics2D g2) {
         g2.setColor(new Color(45, 47, 49));
         for(Wall w : LevelManager.getCurrentLevel().getWalls()) {
             g2.fillRect(w.getX(), w.getY(), w.getWidth(), w.getHeight());
         }
     }
 
+    public void paintEnemy(Graphics2D g2) {
+        for(Enemy e : LevelManager.getCurrentLevel().getEnemies()) {
+            AffineTransform af = new AffineTransform();
+            af.rotate(e.getRotation() + 1.5708, e.getX() + 34/2, e.getY() + 39/2);
+            g2.setTransform(af);
+            g2.drawImage(playerImage, e.getX(), e.getY(), Main.getInstance().gamedisplay);
+        }
+    }
+    
     public void paintBullets(Graphics2D g2) {
         g2.setTransform(blank);
         g2.setColor(Color.BLACK);

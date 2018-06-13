@@ -13,10 +13,10 @@ public class LevelManager {
         //reset bullet id and clear the shot list
     }
     
-    public static void init() {
+    public static void init(int diff) {
         player = new Player(100, 100, 100, WeaponType.PISTOL, 50, 150, 0);
         Wall[] w = {new Wall(400, 410, 70, 50)};
-        currentLevel = new Level(w, 60, 600, 600);
+        currentLevel = new Level(w, 60, 600, 600, diff);
     }
     
     public static Player getPlayer() {
