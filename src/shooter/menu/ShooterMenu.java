@@ -1,12 +1,11 @@
 package shooter.menu;
 
+import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import shooter.GameFrame;
 import shooter.Main;
 import shooter.events.EventHandler;
 import shooter.events.types.PreGameInitiateEvent;
@@ -34,16 +34,14 @@ public class ShooterMenu extends JPanel implements ActionListener {
 	JLabel left = new JLabel("(A) - to move left of cursor");
 	JLabel right = new JLabel("(D) - to move right of cursor");
 	JLabel shoot = new JLabel("(SPACEBAR) - to shoot");
-	JPanel controlsPanel = new JPanel();
+	boolean controlsShown = false;
 	
 	JRadioButton easyDifficulty = new JRadioButton("Easy", true);
 	JRadioButton mediumDifficulty = new JRadioButton("Medium", false);
 	JRadioButton hardDifficulty = new JRadioButton("Hard", false);
 	ButtonGroup difficultiesGroup = new ButtonGroup();
-	JPanel confirmPlayPanel = new JPanel();
 	JButton confirmPlay = new JButton("Go!");
-	
-	JPanel bottomSection = new JPanel();
+	boolean confirmPlayShown = false;
 	
 	Font titleFont = new Font("Roboto", Font.ITALIC, 50);
 	Font defaultFont = new Font("Roboto", Font.PLAIN, 15);
@@ -53,22 +51,39 @@ public class ShooterMenu extends JPanel implements ActionListener {
 		InitializeGuiDetails();
 		
 		this.add(title);
-		this.add(buttonsPanel);
-		this.add(bottomSection);
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
+		
+		this.add(play);
+		this.add(controls);
+		this.add(quit);
+		
+		this.add(easyDifficulty);
+		this.add(mediumDifficulty);
+		this.add(hardDifficulty);
+		this.add(confirmPlay);
+		
+		this.add(weaponOne);
+		this.add(weaponTwo);
+		this.add(forwards);
+		this.add(backwards);
+		this.add(left);
+		this.add(right);
+		this.add(shoot);
+		
+		this.setLayout(null);
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getActionCommand().equals("Play"))
 		{
-			confirmPlayPanel.setVisible(!confirmPlayPanel.isVisible());
+			confirmPlayShown = !confirmPlayShown;
+			confirmPlayVisibility();
 			repaint();
 		}
 		
 		else if (arg0.getActionCommand().equals("Controls"))
 		{
-			controlsPanel.setVisible(!controlsPanel.isVisible());
+			controlsShown = !controlsShown;
+			controlLabelsVisibility();
 			repaint();
 		}
 		
@@ -96,54 +111,73 @@ public class ShooterMenu extends JPanel implements ActionListener {
 	
 	private void InitializeGuiDetails() {
 		title.setFont(titleFont);
-		title.setAlignmentX(CENTER_ALIGNMENT);
+		title.setBounds(GameFrame.width / 3, 30, 1000, 50);
 		
-		setMainButtons(play, "Play");
-		setMainButtons(controls, "Controls");
-		setMainButtons(quit, "Quit");
-		buttonsPanel.setLayout(new GridLayout(1, 3, 50, 50));
-		buttonsPanel.setAlignmentX(CENTER_ALIGNMENT);
+		setMainButtons(play, "Play", 0);
+		setMainButtons(controls, "Controls", 250);
+		setMainButtons(quit, "Quit", 500);
 		
+		setConfirmPlayPanelDetails(easyDifficulty, 0);
+		setConfirmPlayPanelDetails(mediumDifficulty, 40);
+		setConfirmPlayPanelDetails(hardDifficulty, 80);
 		confirmPlay.addActionListener(this);
 		confirmPlay.setActionCommand("Go");
-		setConfirmPlayPanelDetails(easyDifficulty);
-		setConfirmPlayPanelDetails(mediumDifficulty);
-		setConfirmPlayPanelDetails(hardDifficulty);
-		confirmPlayPanel.add(confirmPlay);
 		confirmPlay.setFont(defaultFont);
-		confirmPlayPanel.setLayout(new BoxLayout(confirmPlayPanel, BoxLayout.Y_AXIS));
-		confirmPlayPanel.setVisible(false);	
+		confirmPlay.setVisible(confirmPlayShown);
+		confirmPlay.setBounds(GameFrame.width / 3, (GameFrame.height / 5) + 120, 140, 50);
 		
-		setControlLabels(weaponOne);
-		setControlLabels(weaponTwo);
-		setControlLabels(forwards);
-		setControlLabels(backwards);
-		setControlLabels(left);
-		setControlLabels(right);
-		setControlLabels(shoot);
-		controlsPanel.setLayout(new BoxLayout(controlsPanel, BoxLayout.Y_AXIS));
-		controlsPanel.setVisible(false);
-		
-		bottomSection.add(confirmPlayPanel);
-		bottomSection.add(controlsPanel);
-		bottomSection.setLayout(new BoxLayout(bottomSection, BoxLayout.X_AXIS));
+		setControlLabels(weaponOne, 0);
+		setControlLabels(weaponTwo, 20);
+		setControlLabels(forwards, 50);
+		setControlLabels(backwards, 70);
+		setControlLabels(left, 90);
+		setControlLabels(right, 110);
+		setControlLabels(shoot, 140);
 	}
 	
-	private void setMainButtons(JButton button, String actionCommand) {
+	private void setMainButtons(JButton button, String actionCommand, int space) {
 		button.setFont(defaultFont);
 		button.addActionListener(this);
-		button.setActionCommand(actionCommand);
-		buttonsPanel.add(button);
+		button.setActionCommand(actionCommand);		
+		
+		int startX = (GameFrame.width / 3) + space;
+		int startY = GameFrame.height / 10;
+		button.setBounds(startX, startY, 160, 70);
 	}
 	
-	private void setConfirmPlayPanelDetails(JRadioButton radioButton) {
+	private void setConfirmPlayPanelDetails(JRadioButton radioButton, int space) {
 		radioButton.setFont(defaultFont);
 		difficultiesGroup.add(radioButton);
-		confirmPlayPanel.add(radioButton);
+		radioButton.setVisible(confirmPlayShown);
+		
+		int startX = GameFrame.width / 3;
+		int startY = (GameFrame.height / 5) + space;
+		radioButton.setBounds(startX, startY, 200, 20);
 	}
 	
-	private void setControlLabels(JLabel label) {
-		controlsPanel.add(label);
+	private void setControlLabels(JLabel label, int space) {
 		label.setFont(defaultFont);
+		label.setVisible(controlsShown);
+		
+		int startX = (GameFrame.width / 3) + 250;
+		int startY = (GameFrame.height / 5) + space;
+		label.setBounds(startX, startY, 400, 15);
+	}
+	
+	private void confirmPlayVisibility() {
+		easyDifficulty.setVisible(confirmPlayShown);
+		mediumDifficulty.setVisible(confirmPlayShown);
+		hardDifficulty.setVisible(confirmPlayShown);
+		confirmPlay.setVisible(confirmPlayShown);
+	}
+	
+	private void controlLabelsVisibility() {
+		weaponOne.setVisible(controlsShown);
+		weaponTwo.setVisible(controlsShown);
+		forwards.setVisible(controlsShown);
+		backwards.setVisible(controlsShown);
+		left.setVisible(controlsShown);
+		right.setVisible(controlsShown);
+		shoot.setVisible(controlsShown);
 	}
 }
