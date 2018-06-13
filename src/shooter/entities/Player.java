@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.geometry.Rectangle2D;
+import shooter.level.LevelManager;
 
 public class Player {
 
@@ -131,19 +132,27 @@ public class Player {
         if(left && backward) speed /= 2;
         if(right && forward) speed /= 2;
         if(right && backward) speed /= 2;
+        int tempX = x, tempY = y;
         if(dir.equals("W")) {
-            x -= speed * Math.sin(rotation);
-            y += speed * Math.cos(rotation);
+            tempX -= speed * Math.sin(rotation);
+            tempY += speed * Math.cos(rotation);
         } else if(dir.equals("D")) {
-            x -= speed * Math.sin(rotation - 1.5708);
-            y += speed * Math.cos(rotation - 1.5708);
+            tempX -= speed * Math.sin(rotation - 1.5708);
+            tempY += speed * Math.cos(rotation - 1.5708);
         } else if(dir.equals("S")) {
-            x += speed * Math.sin(rotation);
-            y -= speed * Math.cos(rotation);
+            tempX += speed * Math.sin(rotation);
+            tempY -= speed * Math.cos(rotation);
         } else if(dir.equals("A")) {
-            x += speed * Math.sin(rotation - 1.5708);
-            y -= speed * Math.cos(rotation - 1.5708);
+            tempX += speed * Math.sin(rotation - 1.5708);
+            tempY -= speed * Math.cos(rotation - 1.5708);
         }
+        for(Wall w : LevelManager.getCurrentLevel().getWalls()) {
+            if(getBounds(tempX, tempY).intersects(w.getBounds())) {
+                return;
+            }
+        }
+        x += (tempX - x);
+        y += (tempY - y);
     }
     
     public void shoot(int tick) {
@@ -165,7 +174,7 @@ public class Player {
         return shot;
     }
 
-    public Rectangle2D getBounds() {
-        return new Rectangle2D(x, y, 10, 10);
+    public Rectangle2D getBounds(int bx, int by) {
+        return new Rectangle2D(bx, by, 20, 20);
     }
 }
