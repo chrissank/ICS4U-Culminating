@@ -11,8 +11,10 @@ import javax.imageio.ImageIO;
 
 import shooter.Main;
 import shooter.entities.Player;
+import shooter.entities.Wall;
 import shooter.events.EventListener;
 import shooter.events.Listener;
+import shooter.events.types.GameTickEvent;
 import shooter.events.types.PreGameInitiateEvent;
 import shooter.events.types.RepaintEvent;
 import shooter.level.LevelManager;
@@ -36,10 +38,25 @@ public class PaintPlayerListener implements Listener {
         this.player = LevelManager.getPlayer();
     }
 
+    @EventListener
+    public void onGameTick(GameTickEvent e) {
+        checkCollision();
+    }
 
     @EventListener
     public void onPaint(RepaintEvent e) {
         drawPlayer(e.getGraphics());
+    }
+    
+    public void checkCollision() {
+        for(Wall w : LevelManager.getCurrentLevel().getWalls()) {
+            if(w.getBounds().intersects(player.getBounds())) {
+                player.setBackward(false);
+                player.setForward(false);
+                player.setRight(false);
+                player.setLeft(false);
+            }
+        }
     }
 
     public void drawPlayer(Graphics2D g2) {

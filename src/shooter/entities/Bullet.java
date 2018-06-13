@@ -31,7 +31,7 @@ public class Bullet {
     }
 
     public Rectangle2D getBounds() {
-        return new Rectangle2D(x, y, 1, 1);
+        return new Rectangle2D(x, y, 2, 2);
     }
 
     public void move() {

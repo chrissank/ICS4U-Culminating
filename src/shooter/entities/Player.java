@@ -3,6 +3,8 @@ package shooter.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.geometry.Rectangle2D;
+
 public class Player {
 
     private int nextID;
@@ -161,5 +163,9 @@ public class Player {
 
     public List<Bullet> getBullets() {
         return shot;
+    }
+
+    public Rectangle2D getBounds() {
+        return new Rectangle2D(x, y, 10, 10);
     }
 }

@@ -33,30 +33,30 @@ public class PaintEntityListener implements Listener {
         checkCollision();
     }
     
-    
     @EventListener
     public void onPaint(RepaintEvent e) {
         paintBullets(e.getGraphics());
         paintWalls(e.getGraphics());
+        e.getGraphics().setColor(new Color(10, 10, 40));
     }
     
     private void checkCollision() {
         for(Wall w : LevelManager.getCurrentLevel().getWalls()) {
             for(Bullet b : LevelManager.getPlayer().getBullets()) {
                 if(b.getBounds().intersects(w.getBounds())) {
-                    b.setX(-1000);
-                    System.out.println("intersect");
+                    b.setX(-5000);
                     toRemove.add(b.getID());
                 }
             }
         }
+        for(int i : toRemove) LevelManager.getPlayer().getBullets().remove(i);
+        toRemove.clear();
     }
 
     private void paintWalls(Graphics2D g2) {
-        g2.setColor(new Color(85, 87, 89));
+        g2.setColor(new Color(45, 47, 49));
         for(Wall w : LevelManager.getCurrentLevel().getWalls()) {
-            //System.out.println(w.getX() + " " + w.getY());
-            g2.drawRect(w.getX(), w.getY(), w.getWidth(), w.getHeight());
+            g2.fillRect(w.getX(), w.getY(), w.getWidth(), w.getHeight());
         }
     }
 
