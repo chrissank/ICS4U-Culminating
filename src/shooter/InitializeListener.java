@@ -16,7 +16,7 @@ public class InitializeListener implements Listener {
     
     @EventListener
     public void onInit(InitiateEvent e) {
-        //playClip();
+        //playClip();    	
         main.frame = new GameFrame();
         main.menu = new ShooterMenu();
         main.gamedisplay = new GameDisplay(); // causes the game to lag on load (textures)
