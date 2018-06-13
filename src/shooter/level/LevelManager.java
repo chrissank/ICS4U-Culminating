@@ -1,6 +1,7 @@
 package shooter.level;
 
 import shooter.entities.Player;
+import shooter.entities.Wall;
 import shooter.entities.WeaponType;
 
 public class LevelManager {
@@ -9,12 +10,13 @@ public class LevelManager {
     private static Level currentLevel;
     
     public static void nextLevel() {
-        
+        //reset bullet id and clear the shot list
     }
     
     public static void init() {
         player = new Player(100, 100, 100, WeaponType.PISTOL, 50, 150, 0);
-        System.out.println(player.toString());
+        Wall[] w = {new Wall(400, 410, 10, 3)};
+        currentLevel = new Level(w, 60, 600, 600);
     }
     
     public static Player getPlayer() {

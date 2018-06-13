@@ -2,9 +2,11 @@ package shooter.events;
 
 import shooter.Main;
 import shooter.events.types.GameInitiateEvent;
+import shooter.events.types.GameTickEvent;
 import shooter.events.types.InitiateEvent;
 import shooter.events.types.MenuInitiateEvent;
 import shooter.events.types.PreGameInitiateEvent;
+import shooter.events.types.RepaintEvent;
 
 public class CoreListeners implements Listener {
     
@@ -21,5 +23,10 @@ public class CoreListeners implements Listener {
     @EventListener
     public void onPreGameInitiateEvent(PreGameInitiateEvent e) {
         EventHandler.callEvent(new GameInitiateEvent(e.getDifficulty()));
+    }
+    
+    @EventListener
+    public void onGameTick(GameTickEvent e)  {
+        main.gamedisplay.repaint();
     }
 }

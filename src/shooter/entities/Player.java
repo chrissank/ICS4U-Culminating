@@ -1,10 +1,16 @@
 package shooter.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
 
+    private int nextID;
     int x, y, health, pistolAmmo, rifleAmmo;
     double rotation;
     WeaponType weapon;
+    ArrayList<Bullet> shot;
+    boolean left, right, forward, backward, shoot = false;
     public Player(int x, int y, int health, WeaponType t, int pistolAmmo, int rifleAmmo, double rot) {
         this.x = x;
         this.y = y;
@@ -13,6 +19,8 @@ public class Player {
         this.pistolAmmo = pistolAmmo;
         this.rifleAmmo = rifleAmmo;
         this.rotation = rot;
+        this.shot = new ArrayList<>();
+        this.nextID = 0;
     }
 
     public int getX() {
@@ -71,28 +79,83 @@ public class Player {
         this.rotation = rot;
     }
     
+    public void setLeft(boolean b) {
+        this.left = b;
+    }
+
+    public void setRight(boolean b) {
+        this.right = b;
+    }
+    
+    public void setForward(boolean b) {
+        this.forward = b;
+    }
+    
+    public void setBackward(boolean b) {
+        this.backward = b;
+    }
+    
+    public void setShooting(boolean b) {
+        this.shoot = b;
+    }
+    
+    public boolean isLeft() {
+        return this.left;
+    }
+    
+    public boolean isRight() {
+        return this.right;
+    }
+    
+    public boolean isForward() {
+        return this.forward;
+    }
+    
+    public boolean isBackward() {
+        return this.backward;
+    }
+    
+    public boolean isShooting() {
+        return this.shoot;
+    }
+    
     public String toString() {
         return "x: " + x + " y: " + y + " health: " + health + " weapon: " + weapon.toString() + " pistol ammo: " + pistolAmmo + " rifle ammo: " + rifleAmmo;
     }
     
     public void move(String dir) {
         int speed = 10;
-        if(dir.equals("w")) {
+        if(dir.equals("W")) {
             x -= speed * Math.sin(rotation);
             y += speed * Math.cos(rotation);
-        } else if(dir.equals("a")) {
+        } else if(dir.equals("D")) {
             x -= speed * Math.sin(rotation - 1.5708);
             y += speed * Math.cos(rotation - 1.5708);
-        } else if(dir.equals("s")) {
+        } else if(dir.equals("S")) {
             x += speed * Math.sin(rotation);
             y -= speed * Math.cos(rotation);
-        } else if(dir.equals("d")) {
+        } else if(dir.equals("A")) {
             x += speed * Math.sin(rotation - 1.5708);
             y -= speed * Math.cos(rotation - 1.5708);
         }
     }
     
-    public void shoot() {
-        
+    public void shoot(int tick) {
+        if(this.weapon == WeaponType.PISTOL) {
+            if(pistolAmmo <= 0) return;
+            if(tick % 10 != 0) return;
+            pistolAmmo--;
+        } else {
+            if(rifleAmmo <= 0) return;
+            if(tick % 5 != 0) return;
+            rifleAmmo--;
+        }
+        shot.add(new Bullet(x, y, rotation, weapon, nextID));
+        nextID++;
+        //EventHandler.callEvent(new );
+    }
+
+    public List<Bullet> getBullets() {
+        return shot;
     }
 }

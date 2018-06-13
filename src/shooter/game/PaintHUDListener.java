@@ -70,6 +70,17 @@ public class PaintHUDListener implements Listener {
         drawHealthBar(g2);
         drawAmmo(g2);
         drawWeaponButtons(g2);
+        paintButtons(g2);
+    }
+
+    private void paintButtons(Graphics2D g2) {
+        if(player.getWeapon() == WeaponType.PISTOL) {
+            pistolButton.setBackground(Color.GREEN);
+            rifleButton.setBackground(Color.WHITE);
+        } else {
+            pistolButton.setBackground(Color.WHITE);
+            rifleButton.setBackground(Color.GREEN);
+        }
     }
 
     public void drawHealthBar(Graphics2D g2) {
@@ -119,13 +130,9 @@ public class PaintHUDListener implements Listener {
         rifleButton.setFocusable(false);
         pistolButton.addActionListener((e) -> {
             player.setWeapon(WeaponType.PISTOL);
-            pistolButton.setBackground(Color.GREEN);
-            rifleButton.setBackground(Color.WHITE);
         });
         rifleButton.addActionListener((e) -> {
             player.setWeapon(WeaponType.RIFLE);
-            pistolButton.setBackground(Color.WHITE);
-            rifleButton.setBackground(Color.GREEN);
         });
         pistolButton.setActionCommand("Pistol");
         rifleButton.setActionCommand("Rifle");
