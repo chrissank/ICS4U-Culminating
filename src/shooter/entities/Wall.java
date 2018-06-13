@@ -29,7 +29,6 @@ public class Wall {
     }
     
     public Rectangle2D getBounds() {
-        Rectangle2D r = new Rectangle2D(x, y, width, height);
-        return r;
+        return new Rectangle2D(x, y, width, height);
     }
 }

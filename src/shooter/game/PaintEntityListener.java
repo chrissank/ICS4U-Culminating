@@ -11,6 +11,7 @@ import shooter.entities.Wall;
 import shooter.entities.WeaponType;
 import shooter.events.EventListener;
 import shooter.events.Listener;
+import shooter.events.types.GameTickEvent;
 import shooter.events.types.RepaintEvent;
 import shooter.level.LevelManager;
 
@@ -19,6 +20,7 @@ public class PaintEntityListener implements Listener {
     AffineTransform blank;
     ArrayList<Integer> toRemove;
     int width, height;
+    
     public PaintEntityListener() {
         this.width = Toolkit.getDefaultToolkit().getScreenSize().width + 2;
         this.height = Toolkit.getDefaultToolkit().getScreenSize().height + 2;
@@ -27,15 +29,34 @@ public class PaintEntityListener implements Listener {
     }
     
     @EventListener
+    public void onTick(GameTickEvent e) {
+        checkCollision();
+    }
+    
+    
+    @EventListener
     public void onPaint(RepaintEvent e) {
         paintBullets(e.getGraphics());
         paintWalls(e.getGraphics());
     }
     
+    private void checkCollision() {
+        for(Wall w : LevelManager.getCurrentLevel().getWalls()) {
+            for(Bullet b : LevelManager.getPlayer().getBullets()) {
+                if(b.getBounds().intersects(w.getBounds())) {
+                    b.setX(-1000);
+                    System.out.println("intersect");
+                    toRemove.add(b.getID());
+                }
+            }
+        }
+    }
+
     private void paintWalls(Graphics2D g2) {
+        g2.setColor(new Color(85, 87, 89));
         for(Wall w : LevelManager.getCurrentLevel().getWalls()) {
             //System.out.println(w.getX() + " " + w.getY());
-            g2.drawRect(w.getX(), w.getY(), w.getHeight(), w.getWidth());
+            g2.drawRect(w.getX(), w.getY(), w.getWidth(), w.getHeight());
         }
     }
 

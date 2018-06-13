@@ -9,6 +9,7 @@ import shooter.events.types.GameTickEvent;
 public class GameThread extends Thread {
     
     public static boolean STATUS = true;
+    public static int time = 0;
     int tick;
     
     public void run() {
@@ -16,7 +17,10 @@ public class GameThread extends Thread {
         while(STATUS) {
             EventHandler.callEvent(new GameTickEvent(tick));
             tick++;
-            if(tick == 41) tick = 0;
+            if(tick == 41) {
+                time++;
+                tick = 0;
+            }
             try {
                 Thread.sleep(1000 / 40);
             } catch (InterruptedException e) {

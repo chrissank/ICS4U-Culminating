@@ -47,4 +47,8 @@ public class Bullet {
         return this.type;
     }
 
+    public void setX(int i) {
+        this.x = i;
+    }
+
 }

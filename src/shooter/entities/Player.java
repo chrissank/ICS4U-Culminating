@@ -124,7 +124,11 @@ public class Player {
     }
     
     public void move(String dir) {
-        int speed = 10;
+        int speed = 8;
+        if(left && forward) speed /= 2;
+        if(left && backward) speed /= 2;
+        if(right && forward) speed /= 2;
+        if(right && backward) speed /= 2;
         if(dir.equals("W")) {
             x -= speed * Math.sin(rotation);
             y += speed * Math.cos(rotation);
