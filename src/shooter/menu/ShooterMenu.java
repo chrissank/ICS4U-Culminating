@@ -1,12 +1,16 @@
 package shooter.menu;
 
-import java.awt.FlowLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,14 +25,18 @@ import shooter.events.types.PreGameInitiateEvent;
 public class ShooterMenu extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
-    JLabel title = new JLabel("SHOOTER GAME (Name TBD)");
+    
+    BufferedImage backgroundImage;
+    JLabel background = new JLabel();
+    
+    JLabel title = new JLabel("-- ZOMBIE INFESTATION --");
 	JButton play = new JButton("Play");
 	JButton controls = new JButton("Controls");
 	JButton quit = new JButton("Quit");
 	JPanel buttonsPanel = new JPanel();
 	
-	JLabel weaponOne = new JLabel("(1) - to use Pistol");
-	JLabel weaponTwo  = new JLabel("(2) - to use Rifle");
+	JLabel weaponOne = new JLabel("(1) - to use pistol");
+	JLabel weaponTwo  = new JLabel("(2) - to use rifle");
 	JLabel forwards = new JLabel("(W) - to move forward towards cursor");
 	JLabel backwards = new JLabel("(S) - to move backward from cursor");
 	JLabel left = new JLabel("(A) - to move left of cursor");
@@ -43,8 +51,9 @@ public class ShooterMenu extends JPanel implements ActionListener {
 	JButton confirmPlay = new JButton("Go!");
 	boolean confirmPlayShown = false;
 	
-	Font titleFont = new Font("Roboto", Font.ITALIC, 50);
-	Font defaultFont = new Font("Roboto", Font.PLAIN, 15);
+	Font titleFont = new Font("Roboto", Font.ITALIC, 53);
+	Font defaultFont = new Font("Roboto", Font.PLAIN, 17);
+	Color whiteColor = new Color(255, 255, 255);
 	
 	public ShooterMenu() {	
 	
@@ -68,6 +77,8 @@ public class ShooterMenu extends JPanel implements ActionListener {
 		this.add(left);
 		this.add(right);
 		this.add(shoot);
+		
+		this.add(background);
 		
 		this.setLayout(null);
 	}
@@ -110,8 +121,18 @@ public class ShooterMenu extends JPanel implements ActionListener {
 	}
 	
 	private void InitializeGuiDetails() {
+		try {
+			backgroundImage = ImageIO.read(ShooterMenu.class.getResource("/resources/Main Menu Background.png"));
+		}
+		catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		background.setIcon(new ImageIcon(backgroundImage));
+		background.setBounds(0, 0, GameFrame.width, GameFrame.height);
+		
 		title.setFont(titleFont);
 		title.setBounds(GameFrame.width / 3, 30, 1000, 50);
+		title.setForeground(whiteColor);
 		
 		setMainButtons(play, "Play", 0);
 		setMainButtons(controls, "Controls", 250);
@@ -138,7 +159,7 @@ public class ShooterMenu extends JPanel implements ActionListener {
 	private void setMainButtons(JButton button, String actionCommand, int space) {
 		button.setFont(defaultFont);
 		button.addActionListener(this);
-		button.setActionCommand(actionCommand);		
+		button.setActionCommand(actionCommand);
 		
 		int startX = (GameFrame.width / 3) + space;
 		int startY = GameFrame.height / 10;
@@ -149,6 +170,8 @@ public class ShooterMenu extends JPanel implements ActionListener {
 		radioButton.setFont(defaultFont);
 		difficultiesGroup.add(radioButton);
 		radioButton.setVisible(confirmPlayShown);
+		radioButton.setOpaque(false);
+		radioButton.setForeground(whiteColor);
 		
 		int startX = GameFrame.width / 3;
 		int startY = (GameFrame.height / 5) + space;
@@ -158,10 +181,11 @@ public class ShooterMenu extends JPanel implements ActionListener {
 	private void setControlLabels(JLabel label, int space) {
 		label.setFont(defaultFont);
 		label.setVisible(controlsShown);
+		label.setForeground(whiteColor);
 		
 		int startX = (GameFrame.width / 3) + 250;
 		int startY = (GameFrame.height / 5) + space;
-		label.setBounds(startX, startY, 400, 15);
+		label.setBounds(startX, startY, 400, 20);
 	}
 	
 	private void confirmPlayVisibility() {

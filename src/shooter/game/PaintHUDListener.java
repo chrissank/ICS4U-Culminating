@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -64,12 +65,13 @@ public class PaintHUDListener implements Listener {
     }
 
     public void drawHUD(Graphics2D g2)
-    {
-        //g2.drawImage(backgroundImg, 0, 0, this); //Background image
-
+    {        
         drawHealthBar(g2);
         drawAmmo(g2);
         drawWeaponButtons(g2);
+        
+        //BACKGROUND IMAGE NOT WORKING AT THE MOMENT
+        //g2.drawImage(backgroundImg, 0, 0, this);
     }
 
     public void drawHealthBar(Graphics2D g2) {
