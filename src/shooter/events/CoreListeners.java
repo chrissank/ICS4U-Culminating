@@ -6,7 +6,6 @@ import shooter.events.types.GameTickEvent;
 import shooter.events.types.InitiateEvent;
 import shooter.events.types.MenuInitiateEvent;
 import shooter.events.types.PreGameInitiateEvent;
-import shooter.events.types.RepaintEvent;
 
 public class CoreListeners implements Listener {
     
