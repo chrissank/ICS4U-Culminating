@@ -18,16 +18,16 @@ public class Enemy {
         r = new Random();
         if(zone == 0) {
             // left
-            x = r.nextInt(50);
-            y = r.nextInt(Toolkit.getDefaultToolkit().getScreenSize().height) - 10;
+            x = r.nextInt(50) + 20;
+            y = r.nextInt(Toolkit.getDefaultToolkit().getScreenSize().height) - 20;
         } else if(zone == 1) {
             // right
-            x = Toolkit.getDefaultToolkit().getScreenSize().width - r.nextInt(50) - 10;
-            y = r.nextInt(Toolkit.getDefaultToolkit().getScreenSize().height) - 10;
+            x = Toolkit.getDefaultToolkit().getScreenSize().width - r.nextInt(50) - 40;
+            y = r.nextInt(Toolkit.getDefaultToolkit().getScreenSize().height) - 20;
         } else {
             // top
             x = r.nextInt(Toolkit.getDefaultToolkit().getScreenSize().width);
-            y = r.nextInt(50);
+            y = r.nextInt(50) + 20;
         }
     }
 

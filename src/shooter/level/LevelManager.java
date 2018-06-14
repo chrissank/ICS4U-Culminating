@@ -52,11 +52,10 @@ public class LevelManager {
 
         int numberOfWalls = (rand.nextInt(50) % 5) + 4;
         //int numberOfWalls = 50;
-
-
-        Wall[] currentLevelWalls = new Wall[numberOfWalls];
-
+        ArrayList<Wall> walls = new ArrayList<>();
+        
         for (int i = 0; i < numberOfWalls; i++) {
+            System.out.println("test7");
             boolean wallType = getRandomBoolean();
             width.add(wallType ? 50 : rand.nextInt(75) + 100);
             height.add(wallType ? rand.nextInt(75) + 100 : 50);
@@ -67,53 +66,42 @@ public class LevelManager {
             x.add(rand.nextInt(GameFrame.width - (correctedBorderX * 2)) + correctedBorderX);
             y.add(rand.nextInt(GameFrame.height - (correctedBorderY * 2)) + correctedBorderY);        		
 
-            currentLevelWalls[i] = new Wall(x.get(i), y.get(i), width.get(i), height.get(i));
-
-            if (currentLevelWalls[i].getBounds().intersects(player.getBounds(player.getX(), player.getY()))) {
-                currentLevelWalls[i] = null;
-                i--;
+            Wall w = new Wall(x.get(i), y.get(i), width.get(i), height.get(i));
+            if(!w.getBounds().intersects(player.getBounds(player.getX(), player.getY()))) {
+                walls.add(w);
             }
         }
-
+        walls.add(new Wall(0, -40, Toolkit.getDefaultToolkit().getScreenSize().width, 40));
+        walls.add(new Wall(-40, 0, 40, Toolkit.getDefaultToolkit().getScreenSize().height));
+        walls.add(new Wall(0, Toolkit.getDefaultToolkit().getScreenSize().height, Toolkit.getDefaultToolkit().getScreenSize().width, 40));
+        walls.add(new Wall(Toolkit.getDefaultToolkit().getScreenSize().width, 0, 40, Toolkit.getDefaultToolkit().getScreenSize().height));
+      
         int healthX = 0, healthY = 0, ammoX = 0, ammoY = 0;
         boolean b = false;
         while(!b) {
             healthX = rand.nextInt(Toolkit.getDefaultToolkit().getScreenSize().width - 50) + 50;
             healthY = rand.nextInt(Toolkit.getDefaultToolkit().getScreenSize().height - 50) + 50;
-            for(Wall w : currentLevelWalls) {
+            for(Wall w : walls) {
                 if(!new Rectangle2D(healthX, healthY, 20, 20).intersects(w.getBounds())) {
                     b = true;
+                    break;
                 }
             }
         }
-        
+
         b = false;
         while(!b) {
             ammoX = rand.nextInt(Toolkit.getDefaultToolkit().getScreenSize().width - 50) + 50;
             ammoY = rand.nextInt(Toolkit.getDefaultToolkit().getScreenSize().height - 50) + 50;
-            for(Wall w : currentLevelWalls) {
+            for(Wall w : walls) {
                 if(!new Rectangle2D(ammoX, ammoY, 20, 20).intersects(w.getBounds())) {
                     b = true;
+                    break;
                 }
             }
         }
 
-        if (!CheckWallCompatibility(numberOfWalls)) GenerateLevel();
-        currentLevel = new Level(currentLevelWalls, 60, healthX, healthY, ammoX, ammoY, diff);
-    }
-
-    private static boolean CheckWallCompatibility(int numberOfWalls) {
-        int playerSpawnX = GameFrame.width / 2;
-        int playerSpawnY = GameFrame.height / 2;
-
-        for (int i = 0; i < numberOfWalls; i++) {
-            boolean xValuesCollide = x.get(i) < playerSpawnX && (x.get(i) + width.get(i)) > playerSpawnX;
-            boolean yValuesCollide = y.get(i) < playerSpawnY && (y.get(i) + height.get(i)) > playerSpawnY;
-
-            if (xValuesCollide && yValuesCollide) return false;
-        }
-
-        return true;
+        currentLevel = new Level(walls, 60, healthX, healthY, ammoX, ammoY, diff);
     }
 
     private static boolean getRandomBoolean() {

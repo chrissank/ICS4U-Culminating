@@ -9,11 +9,11 @@ import shooter.entities.Wall;
 public class Level {
     
     Random r;
-    private Wall[] walls;
+    private ArrayList<Wall> walls;
     private ArrayList<Enemy> enemies;
     private int time, healthx, healthy, nextEnemyID, difficulty, ammox, ammoy;
     
-    public Level(Wall[] walls, int time, int healthx, int healthy, int ammox, int ammoy, int difficulty) {
+    public Level(ArrayList<Wall> walls, int time, int healthx, int healthy, int ammox, int ammoy, int difficulty) {
         this.walls = walls;
         this.enemies = new ArrayList<>();
         this.time = time;
@@ -26,7 +26,7 @@ public class Level {
         r = new Random();
     }
 
-    public Wall[] getWalls() {
+    public ArrayList<Wall> getWalls() {
         return this.walls;
     }
     
