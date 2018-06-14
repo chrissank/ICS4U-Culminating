@@ -27,7 +27,7 @@ public class GameListeners implements Listener {
     @EventListener
     public void onGamePreInit(PreGameInitiateEvent e) {
         main.thread = new GameThread();
-        LevelManager.init();
+        LevelManager.init(e.getDifficulty());
     }
 
     @EventListener

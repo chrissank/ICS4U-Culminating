@@ -10,6 +10,7 @@ import shooter.entities.WeaponType;
 
 public class LevelManager {
 
+    private static int diff;
     private static Player player;
     private static Level currentLevel;
     
@@ -20,12 +21,11 @@ public class LevelManager {
     
     public static void nextLevel() {
         //reset bullet id and clear the shot list
-        GenerateLevel();
     }
     
-    public static void init() {
+    public static void init(int difference) {
         player = new Player(GameFrame.width / 2, GameFrame.height / 2, 100, WeaponType.PISTOL, 75, 250, 0);
-        
+        diff = difference;
         GenerateLevel();
     }
     
@@ -72,7 +72,7 @@ public class LevelManager {
         	levelOneWalls[i] = new Wall(x.get(i), y.get(i), width.get(i), height.get(i));
     	}
     	
-        currentLevel = new Level(levelOneWalls, 60, 600, 600);
+        currentLevel = new Level(levelOneWalls, 60, 600, 600, diff);
     }
     
     private static boolean getRandomBoolean() {
