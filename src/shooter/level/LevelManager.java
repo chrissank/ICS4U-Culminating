@@ -73,6 +73,23 @@ public class LevelManager {
     	}
     	
         currentLevel = new Level(levelOneWalls, 60, 200, 200, 300, 300, diff);
+    	if (!CheckWallCompatibility(numberOfWalls)) GenerateLevel();
+
+    	else currentLevel = new Level(levelOneWalls, 60, 600, 600, diff);
+    }
+    
+    private static boolean CheckWallCompatibility(int numberOfWalls) {
+    	int playerSpawnX = GameFrame.width / 2;
+    	int playerSpawnY = GameFrame.height / 2;
+    	
+    	for (int i = 0; i < numberOfWalls; i++) {
+        	boolean xValuesCollide = x.get(i) < playerSpawnX && (x.get(i) + width.get(i)) > playerSpawnX;
+        	boolean yValuesCollide = y.get(i) < playerSpawnY && (y.get(i) + height.get(i)) > playerSpawnY;
+    		
+    		if (xValuesCollide && yValuesCollide) return false;
+    	}
+    	
+    	return true;
     }
     
     private static boolean getRandomBoolean() {
