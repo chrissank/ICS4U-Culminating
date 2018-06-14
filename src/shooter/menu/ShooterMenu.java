@@ -152,72 +152,72 @@ public class ShooterMenu extends JPanel implements ActionListener {
         }
         background.setIcon(new ImageIcon(backgroundImage));
         background.setBounds(0, 0, GameFrame.width, GameFrame.height);
-
+        
         title.setFont(titleFont);
         title.setBounds(GameFrame.width / 3, 30, 1000, 50);
         title.setForeground(whiteColor);
-
+        
         setMainButtons(play, "Play", 0);
         setMainButtons(controls, "Controls", 250);
         setMainButtons(quit, "Quit", 500);
-
-        setConfirmPlayPanelDetails(easyDifficulty, 0);
-        setConfirmPlayPanelDetails(mediumDifficulty, 40);
-        setConfirmPlayPanelDetails(hardDifficulty, 80);
+        
+        setConfirmPlayPanelDetails(easyDifficulty, 20);
+        setConfirmPlayPanelDetails(mediumDifficulty, 60);
+        setConfirmPlayPanelDetails(hardDifficulty, 100);
         confirmPlay.addActionListener(this);
         confirmPlay.setActionCommand("Go");
         confirmPlay.setFont(defaultFont);
         confirmPlay.setVisible(confirmPlayShown);
-        confirmPlay.setBounds(GameFrame.width / 3, (GameFrame.height / 5) + 120, 140, 50);
-
+        confirmPlay.setBounds(GameFrame.width / 3, (GameFrame.height / 5) + 140, 140, 50);
+        
         setControlLabels(weaponOne, 20);
-		setControlLabels(weaponTwo, 40);
-		setControlLabels(forwards, 70);
-		setControlLabels(backwards, 90);
-		setControlLabels(left, 110);
-		setControlLabels(right, 130);
-		setControlLabels(shoot, 160);
+        setControlLabels(weaponTwo, 40);
+        setControlLabels(forwards, 70);
+        setControlLabels(backwards, 90);
+        setControlLabels(left, 110);
+        setControlLabels(right, 130);
+        setControlLabels(shoot, 160);
     }
-
+    
     private void setMainButtons(JButton button, String actionCommand, int space) {
         button.setFont(defaultFont);
         button.addActionListener(this);
         button.setActionCommand(actionCommand);
-
+        
         int startX = (GameFrame.width / 3) + space;
         int startY = GameFrame.height / 8;
         button.setBounds(startX, startY, 160, 70);
     }
-
+    
     private void setConfirmPlayPanelDetails(JRadioButton radioButton, int space) {
         radioButton.setFont(defaultFont);
         difficultiesGroup.add(radioButton);
         radioButton.setVisible(confirmPlayShown);
         radioButton.setOpaque(false);
         radioButton.setForeground(whiteColor);
-
+        
         int startX = GameFrame.width / 3;
         int startY = (GameFrame.height / 5) + space;
         radioButton.setBounds(startX, startY, 200, 20);
     }
-
+    
     private void setControlLabels(JLabel label, int space) {
         label.setFont(defaultFont);
         label.setVisible(controlsShown);
         label.setForeground(whiteColor);
-
+        
         int startX = (GameFrame.width / 3) + 250;
         int startY = (GameFrame.height / 5) + space;
         label.setBounds(startX, startY, 400, 20);
     }
-
+    
     private void confirmPlayVisibility() {
         easyDifficulty.setVisible(confirmPlayShown);
         mediumDifficulty.setVisible(confirmPlayShown);
         hardDifficulty.setVisible(confirmPlayShown);
         confirmPlay.setVisible(confirmPlayShown);
     }
-
+    
     private void controlLabelsVisibility() {
         weaponOne.setVisible(controlsShown);
         weaponTwo.setVisible(controlsShown);
