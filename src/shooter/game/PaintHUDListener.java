@@ -32,6 +32,9 @@ public class PaintHUDListener implements Listener {
     BufferedImage pistolAmmoImg;
     BufferedImage rifleImg;
     BufferedImage rifleAmmoImg;
+    
+    BufferedImage healthPackImg;
+    BufferedImage ammoBoxImg;
 
     JButton pistolButton;
     JButton rifleButton;
@@ -53,6 +56,8 @@ public class PaintHUDListener implements Listener {
             pistolAmmoImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Pistol_Ammo_Icon.png"));
             rifleImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Rifle.png"));
             rifleAmmoImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Rifle_Ammo_Icon.png"));
+            healthPackImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Health Pack.png"));
+            ammoBoxImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Ammo Box.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -80,11 +85,14 @@ public class PaintHUDListener implements Listener {
         drawWeaponButtons(g2);
         paintButtons(g2);
         
+        g2.drawImage(healthPackImg, 500, 760, Main.getInstance().gamedisplay);
+        g2.drawImage(ammoBoxImg, 300, 250, Main.getInstance().gamedisplay);
+        
         //IF ZOMBIE DIES
         generateBloodSplatter(g2, 454, 876);
         
-        //BACKGROUND IMAGE NOT WORKING AT THE MOMENT
-        //g2.drawImage(backgroundImg, 0, 0, this);
+        //BACKGROUND
+        //g2.drawImage(backgroundImg, 0, 0, Main.getInstance().gamedisplay);
     }
 
     private void paintButtons(Graphics2D g2) {
@@ -151,7 +159,7 @@ public class PaintHUDListener implements Listener {
     
     private void drawBloodSplat(Graphics2D g2, int x, int y, int sizeOfSplat, int colorIndex, int randomSpaceX, int randomSpaceY) {
     	
-    	if (getRandomBoolean() == true) {
+    	if (getRandomBoolean()) {
     		x += randomSpaceX;
     		y -= randomSpaceY;
     	}

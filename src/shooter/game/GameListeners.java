@@ -1,11 +1,11 @@
 package shooter.game;
 
+import java.awt.event.KeyEvent;
+
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
-
-import com.sun.glass.events.KeyEvent;
 
 import shooter.Main;
 import shooter.entities.Player;
