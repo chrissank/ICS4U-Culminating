@@ -73,6 +73,17 @@ public class LevelManager {
     	}
     	
         currentLevel = new Level(levelOneWalls, 60, 600, 600, diff);
+        
+        CheckWallCompatibility(numberOfWalls);
+    }
+    
+    private static void CheckWallCompatibility(int numberOfWalls) {
+    	int playerSpawnX = GameFrame.width / 2;
+    	int playerSpawnY = GameFrame.height / 2;
+    	
+    	for (int i = 0; i < numberOfWalls; i++) {
+    		
+    	}
     }
     
     private static boolean getRandomBoolean() {
