@@ -99,7 +99,8 @@ public class PaintHUDListener implements Listener {
     }
 
     public void drawHealthBar(Graphics2D g2) {
-        int healthBarX = width / 2;
+       
+    	int healthBarX = width / 2;
         int healthBarY = height - 80;
 
         g2.setPaint(Color.BLACK);

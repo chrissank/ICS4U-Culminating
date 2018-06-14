@@ -70,10 +70,10 @@ public class PaintEntityListener implements Listener {
         for(Enemy e : LevelManager.getCurrentLevel().getEnemies()) {
             for(Bullet b : LevelManager.getPlayer().getBullets()) {
                 if(b.getBounds().intersects(e.getBounds(e.getX(), e.getY()))) {
-                    e.setHealth(e.getHealth() - (b.getType() == WeaponType.PISTOL ? 20 : 10));
+                    e.setHealth(e.getHealth() - (b.getType() == WeaponType.PISTOL ? 30 : 20));
                     b.setX(-5000);
                     toRemoveBullet.add(b.getID());
-                    if(e.getHealth() == 0) {
+                    if(e.getHealth() <= 0) {
                         e.setX(-50000);
                         toRemoveEnemy.add(e.getID());
                     }

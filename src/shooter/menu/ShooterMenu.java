@@ -29,19 +29,19 @@ public class ShooterMenu extends JPanel implements ActionListener {
     BufferedImage backgroundImage;
     JLabel background = new JLabel();
     
-    JLabel title = new JLabel("-- ZOMBIE INFESTATION --");
+    JLabel title = new JLabel("   ZOMBIE INFESTATION");
 	JButton play = new JButton("Play");
 	JButton controls = new JButton("Controls");
 	JButton quit = new JButton("Quit");
 	JPanel buttonsPanel = new JPanel();
 	
-	JLabel weaponOne = new JLabel("(1) - to use pistol");
-	JLabel weaponTwo  = new JLabel("(2) - to use rifle");
-	JLabel forwards = new JLabel("(W) - to move forward towards cursor");
-	JLabel backwards = new JLabel("(S) - to move backward from cursor");
-	JLabel left = new JLabel("(A) - to move left of cursor");
-	JLabel right = new JLabel("(D) - to move right of cursor");
-	JLabel shoot = new JLabel("(SPACEBAR) - to shoot");
+	JLabel weaponOne = new JLabel("1 - to use pistol");
+	JLabel weaponTwo  = new JLabel("2 - to use rifle");
+	JLabel forwards = new JLabel("W - to move forward towards cursor");
+	JLabel backwards = new JLabel("S - to move backward from cursor");
+	JLabel left = new JLabel("A - to move left of cursor");
+	JLabel right = new JLabel("D - to move right of cursor");
+	JLabel shoot = new JLabel("SPACEBAR - to shoot");
 	boolean controlsShown = false;
 	
 	JRadioButton easyDifficulty = new JRadioButton("Easy", true);
@@ -51,8 +51,8 @@ public class ShooterMenu extends JPanel implements ActionListener {
 	JButton confirmPlay = new JButton("Go!");
 	boolean confirmPlayShown = false;
 	
-	Font titleFont = new Font("Roboto", Font.ITALIC, 53);
-	Font defaultFont = new Font("Roboto", Font.PLAIN, 17);
+	Font titleFont = new Font("ZombieTreats", Font.PLAIN, 53);
+	Font defaultFont = new Font("ZombieA", Font.PLAIN, 18);
 	Color whiteColor = new Color(255, 255, 255);
 	
 	public ShooterMenu() {	
@@ -100,7 +100,10 @@ public class ShooterMenu extends JPanel implements ActionListener {
 		
 		else if (arg0.getActionCommand().equals("Quit"))
 		{
-			int confirmed = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?","Exit?",JOptionPane.YES_NO_OPTION);
+			JLabel confirmationQuestion = new JLabel("Are you sure you want to exit?");
+			confirmationQuestion.setFont(defaultFont);
+			
+			int confirmed = JOptionPane.showConfirmDialog(null, confirmationQuestion, null,JOptionPane.YES_NO_OPTION);
 		       
 	        if(confirmed == JOptionPane.YES_OPTION)
 	        {
