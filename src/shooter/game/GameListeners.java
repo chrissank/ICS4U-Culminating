@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 import shooter.Main;
-import shooter.entities.Enemy;
 import shooter.entities.Player;
 import shooter.entities.WeaponType;
 import shooter.events.EventListener;
@@ -49,9 +48,6 @@ public class GameListeners implements Listener {
         if(player.isLeft()) player.move("D");
         if(player.isRight()) player.move("A");
         if(player.isShooting()) player.shoot(e.getTick());
-        for(Enemy en : LevelManager.getCurrentLevel().getEnemies()) {
-            en.move();
-        }
     }
 
     public void registerKeys() {

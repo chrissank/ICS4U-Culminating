@@ -10,7 +10,7 @@ public class Enemy {
 
     Random r;
     public int startZone, health, speed, id, x, y;
-    double rot;
+    double rotation;
     public Enemy(int zone, int health, int speed) {
         this.startZone = zone;
         this.health = health;
@@ -44,24 +44,43 @@ public class Enemy {
     }
     
     public double getRotation() {
-        return this.rot;
+        return this.rotation;
     }
 
-    public Rectangle2D getBounds() {
-        return new Rectangle2D(x, y, 20, 20);
+    public Rectangle2D getBounds(int dx, int dy) {
+        return new Rectangle2D(dx, dy, 40, 40);
     }
     
     public void move() {
         float dx = LevelManager.getPlayer().getX() - x;
         float dy = LevelManager.getPlayer().getY() - y;
-        rot = Math.atan2(dy, dx) - 1.5708;
-        x -= speed * Math.sin(rot);
-        y += speed * Math.cos(rot);
+        rotation = Math.atan2(dy, dx) - 1.5708;
+        int tempX = x, tempY = y;
+        tempX -= speed * Math.sin(rotation);
+        tempY += speed * Math.cos(rotation);
         for(Wall w : LevelManager.getCurrentLevel().getWalls()) {
-            if(getBounds().intersects(w.getBounds())) {
+            if(getBounds(tempX, tempY).intersects(w.getBounds())) {
                 return;
             }
         }
+        x += (tempX - x);
+        y += (tempY - y);
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int i) {
+        this.health = i;
+    }
+
+    public void setX(int i) {
+        this.x = i;
+    }
+
+    public Integer getID() {
+        return this.id;
     }
 
 }

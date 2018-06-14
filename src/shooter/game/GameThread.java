@@ -23,7 +23,7 @@ public class GameThread extends Thread {
                 tick = 0;
             }
             if(LevelManager.getCurrentLevel().getDifficulty() == 0) {
-                if(tick == 40) {
+                if(time % 2 == 0 && tick == 40) {
                     LevelManager.getCurrentLevel().spawn();
                 }
             } else if(LevelManager.getCurrentLevel().getDifficulty() == 1) {

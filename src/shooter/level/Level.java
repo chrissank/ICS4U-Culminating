@@ -55,6 +55,6 @@ public class Level {
     }
 
     public void spawn() {
-        addEnemy(new Enemy(r.nextInt(3), 100, 1));
+        addEnemy(new Enemy(r.nextInt(3), 100, 2));
     }
 }

@@ -39,7 +39,6 @@ public class PaintHUDListener implements Listener {
     int width;
     int height;
     
-    Color[] redColour = new Color[4];
 
     public PaintHUDListener() {
         this.main = Main.getInstance();
@@ -60,11 +59,6 @@ public class PaintHUDListener implements Listener {
         this.width = e.getWidth();
         this.height = e.getHeight();
         
-        redColour[0] = new Color(181, 17, 17);
-        redColour[1] = new Color(192, 19, 19);
-        redColour[2] = new Color(155, 11, 11);
-        redColour[3] = new Color(183, 43, 43);
-        
         initializeGUIDetails();
     }
 
@@ -81,7 +75,6 @@ public class PaintHUDListener implements Listener {
         paintButtons(g2);
         
         //IF ZOMBIE DIES
-        generateBloodSplatter(g2, 454, 876);
         
         //BACKGROUND IMAGE NOT WORKING AT THE MOMENT
         //g2.drawImage(backgroundImg, 0, 0, this);
@@ -134,39 +127,6 @@ public class PaintHUDListener implements Listener {
         rifleButton.setBounds(weaponX, weaponY + 105, 75, 75);
         g2.drawString("1", weaponX - 20, weaponY + 20);
         g2.drawString("2", weaponX - 20, weaponY + 125);
-    }
-
-    private void generateBloodSplatter(Graphics2D g2, int x, int y) {
-    	Random rand = new Random();
-    	int numberOfSplats = (rand.nextInt(10) % 4) + 1;
-    	int sizeOfSplat = rand.nextInt(10) + 10;
-    	int colorIndex = rand.nextInt(10) % 4;
-    	
-    	for (int i = 0; i < numberOfSplats; i++) {
-        	int randomSpaceX = (rand.nextInt(50) % 10) + 1;
-        	int randomSpaceY = (rand.nextInt(50) % 10) + 1;
-    		drawBloodSplat(g2, x, y, sizeOfSplat, colorIndex, randomSpaceX, randomSpaceY);
-    	}
-    }
-    
-    private void drawBloodSplat(Graphics2D g2, int x, int y, int sizeOfSplat, int colorIndex, int randomSpaceX, int randomSpaceY) {
-    	
-    	if (getRandomBoolean() == true) {
-    		x += randomSpaceX;
-    		y -= randomSpaceY;
-    	}
-    	
-    	else {
-    		x -= randomSpaceX;
-    		y += randomSpaceY;
-    	}
-    	
-    	g2.setPaint(redColour[colorIndex]);
-    	g2.fill(new Ellipse2D.Double(x, y, sizeOfSplat, sizeOfSplat));
-	}
-    
-    private boolean getRandomBoolean() {
-    	return Math.random() < 0.5;
     }
 
 	public void initializeGUIDetails()
