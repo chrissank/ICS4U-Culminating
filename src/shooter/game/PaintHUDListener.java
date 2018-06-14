@@ -32,6 +32,9 @@ public class PaintHUDListener implements Listener {
     BufferedImage pistolAmmoImg;
     BufferedImage rifleImg;
     BufferedImage rifleAmmoImg;
+    
+    BufferedImage healthPackImg;
+    BufferedImage ammoBoxImg;
 
     JButton pistolButton;
     JButton rifleButton;
@@ -52,6 +55,8 @@ public class PaintHUDListener implements Listener {
             pistolAmmoImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Pistol_Ammo_Icon.png"));
             rifleImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Rifle.png"));
             rifleAmmoImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Rifle_Ammo_Icon.png"));
+            healthPackImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Health Pack.png"));
+            ammoBoxImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Ammo Box.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -73,6 +78,9 @@ public class PaintHUDListener implements Listener {
         drawAmmo(g2);
         drawWeaponButtons(g2);
         paintButtons(g2);
+        
+        g2.drawImage(healthPackImg, 500, 760, Main.getInstance().gamedisplay);
+        g2.drawImage(ammoBoxImg, 300, 250, Main.getInstance().gamedisplay);
         
         //IF ZOMBIE DIES
         

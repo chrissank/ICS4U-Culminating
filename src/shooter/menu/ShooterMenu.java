@@ -162,7 +162,7 @@ public class ShooterMenu extends JPanel implements ActionListener {
 		button.setActionCommand(actionCommand);
 		
 		int startX = (GameFrame.width / 3) + space;
-		int startY = GameFrame.height / 10;
+		int startY = GameFrame.height / 8;
 		button.setBounds(startX, startY, 160, 70);
 	}
 	
