@@ -53,6 +53,7 @@ public class LevelManager {
     	int numberOfWalls = (rand.nextInt(50) % 5) + 4;
     	//int numberOfWalls = 50;
     	
+    	
     	Wall[] currentLevelWalls = new Wall[numberOfWalls];
     	
     	for (int i = 0; i < numberOfWalls; i++) {
