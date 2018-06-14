@@ -73,8 +73,31 @@ public class LevelManager {
         		i--;
         	}
     	}
+<<<<<<< HEAD
+=======
+    	
+    	if (!CheckWallCompatibility(numberOfWalls)) GenerateLevel();
+>>>>>>> branch 'mitchell' of https://github.com/Pixelatorx2/ICS4U-Culminating.git
 
+<<<<<<< HEAD
     	currentLevel = new Level(currentLevelWalls, 60, healthX, healthY, ammoX, ammoY, diff);
+=======
+    	else currentLevel = new Level(levelOneWalls, 60, 200, 200, 300, 300, diff);
+    }
+    
+    private static boolean CheckWallCompatibility(int numberOfWalls) {
+    	int playerSpawnX = GameFrame.width / 2;
+    	int playerSpawnY = GameFrame.height / 2;
+    	
+    	for (int i = 0; i < numberOfWalls; i++) {
+        	boolean xValuesCollide = x.get(i) < playerSpawnX && (x.get(i) + width.get(i)) > playerSpawnX;
+        	boolean yValuesCollide = y.get(i) < playerSpawnY && (y.get(i) + height.get(i)) > playerSpawnY;
+    		
+    		if (xValuesCollide && yValuesCollide) return false;
+    	}
+    	
+    	return true;
+>>>>>>> branch 'mitchell' of https://github.com/Pixelatorx2/ICS4U-Culminating.git
     }
     
     private static boolean getRandomBoolean() {
