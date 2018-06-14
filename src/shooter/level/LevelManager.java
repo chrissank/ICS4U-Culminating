@@ -49,6 +49,7 @@ public class LevelManager {
     	Random rand = new Random();
     	
     	int numberOfWalls = (rand.nextInt(50) % 5) + 4;
+    	//int numberOfWalls = 50;
     	
     	Wall[] levelOneWalls = new Wall[numberOfWalls];
     	
@@ -72,18 +73,23 @@ public class LevelManager {
         	levelOneWalls[i] = new Wall(x.get(i), y.get(i), width.get(i), height.get(i));
     	}
     	
-        currentLevel = new Level(levelOneWalls, 60, 600, 600, diff);
-        
-        CheckWallCompatibility(numberOfWalls);
+    	if (!CheckWallCompatibility(numberOfWalls)) GenerateLevel();
+
+    	else currentLevel = new Level(levelOneWalls, 60, 600, 600, diff);
     }
     
-    private static void CheckWallCompatibility(int numberOfWalls) {
+    private static boolean CheckWallCompatibility(int numberOfWalls) {
     	int playerSpawnX = GameFrame.width / 2;
     	int playerSpawnY = GameFrame.height / 2;
     	
     	for (int i = 0; i < numberOfWalls; i++) {
+        	boolean xValuesCollide = x.get(i) < playerSpawnX && (x.get(i) + width.get(i)) > playerSpawnX;
+        	boolean yValuesCollide = y.get(i) < playerSpawnY && (y.get(i) + height.get(i)) > playerSpawnY;
     		
+    		if (xValuesCollide && yValuesCollide) return false;
     	}
+    	
+    	return true;
     }
     
     private static boolean getRandomBoolean() {
