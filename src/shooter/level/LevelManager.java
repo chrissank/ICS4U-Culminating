@@ -38,8 +38,8 @@ public class LevelManager {
     }
     
     private static void GenerateLevel() {
-    	int borderX = GameFrame.width / 9;
-    	int borderY = GameFrame.height / 5;
+    	int borderX = GameFrame.width / 12;
+    	int borderY = GameFrame.height / 7;
     	
     	x.clear();
         y.clear();
@@ -48,7 +48,7 @@ public class LevelManager {
     	
     	Random rand = new Random();
     	
-    	int numberOfWalls = (rand.nextInt(50) % 5) + 3;
+    	int numberOfWalls = (rand.nextInt(50) % 5) + 4;
     	
     	Wall[] levelOneWalls = new Wall[numberOfWalls];
     	
@@ -63,31 +63,17 @@ public class LevelManager {
         		width.add(rand.nextInt(75) + 100);
         	}
         	
-        	int correctedBorderX = borderX < width.get(i) ? width.get(i) : borderX;
-        	int correctedBorderY = borderY < height.get(i) ? height.get(i) : borderY;
+        	int correctedBorderX = borderX + width.get(i);
+        	int correctedBorderY = borderY + height.get(i);
         	
         	x.add(rand.nextInt(GameFrame.width - (correctedBorderX * 2)) + correctedBorderX);
         	y.add(rand.nextInt(GameFrame.height - (correctedBorderY * 2)) + correctedBorderY);        		
-        	
-        	//CheckForProperDimensions(i, borderX, borderY);
-        	
+        	     	
         	levelOneWalls[i] = new Wall(x.get(i), y.get(i), width.get(i), height.get(i));
     	}
     	
         currentLevel = new Level(levelOneWalls, 60, 600, 600);
     }
-    
-    /*private static void CheckForProperDimensions(int index, int borderX, int borderY) {
-    	Random rand = new Random();
-    	
-    	while (x.get(index) + width.get(index) > (GameFrame.width - borderX) || y.get(index) + height.get(index) > (GameFrame.height - borderY)) {
-        	x.add(rand.nextInt(GameFrame.width - (borderX * 2)) + borderX);
-        	y.add(rand.nextInt(GameFrame.height - (borderY * 2)) + borderY);  
-    		width.set(index, rand.nextInt(50) + 100);
-    		height.set(index, rand.nextInt(50) + 100);
-    		System.out.println("looping");
-    	}
-    }*/
     
     private static boolean getRandomBoolean() {
     	return Math.random() < 0.5;
