@@ -30,6 +30,8 @@ public class PaintEntityListener implements Listener {
     ArrayList<Integer> toRemoveEnemy;
     int width, height;
     BufferedImage enemyImage;
+    BufferedImage healthPackImg;
+    BufferedImage ammoBoxImg;
     Color[] redColour = new Color[4];
     
     public PaintEntityListener() {
@@ -40,6 +42,8 @@ public class PaintEntityListener implements Listener {
         blank = new AffineTransform();
         try {
             enemyImage = ImageIO.read(PaintEntityListener.class.getResource("/resources/Zombie.png"));
+            healthPackImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Health Pack.png"));
+            ammoBoxImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Ammo Box.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -64,6 +68,7 @@ public class PaintEntityListener implements Listener {
         paintBullets(e.getGraphics());
         paintWalls(e.getGraphics());
         paintEnemy(e.getGraphics());
+        paintCrates(e.getGraphics());
     }
     
     private void checkBulletCollision() {
@@ -131,6 +136,12 @@ public class PaintEntityListener implements Listener {
         }
         for(int i : toRemoveBullet) LevelManager.getPlayer().getBullets().remove(i);
         toRemoveBullet.clear();
+    }
+    
+    public void paintCrates(Graphics2D g2) {
+        g2.setTransform(blank);
+        g2.drawImage(healthPackImg, LevelManager.getCurrentLevel().getHealthpackX(), LevelManager.getCurrentLevel().getHealthpackY(), Main.getInstance().gamedisplay);
+        g2.drawImage(ammoBoxImg, LevelManager.getCurrentLevel().getAmmoX(), LevelManager.getCurrentLevel().getAmmoY(), Main.getInstance().gamedisplay);
     }
 
     private void generateBloodSplatter(Graphics2D g2, int x, int y) {

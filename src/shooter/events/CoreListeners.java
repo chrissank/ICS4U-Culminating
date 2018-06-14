@@ -2,10 +2,12 @@ package shooter.events;
 
 import shooter.Main;
 import shooter.events.types.GameInitiateEvent;
+import shooter.events.types.GameOverEvent;
 import shooter.events.types.GameTickEvent;
 import shooter.events.types.InitiateEvent;
 import shooter.events.types.MenuInitiateEvent;
 import shooter.events.types.PreGameInitiateEvent;
+import shooter.game.GameThread;
 
 public class CoreListeners implements Listener {
     
@@ -27,5 +29,10 @@ public class CoreListeners implements Listener {
     @EventListener
     public void onGameTick(GameTickEvent e)  {
         main.gamedisplay.repaint();
+    }
+    
+    @EventListener
+    public void onGameOver(GameOverEvent e) {
+        GameThread.STATUS = false;
     }
 }

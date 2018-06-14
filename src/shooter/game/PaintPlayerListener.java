@@ -6,13 +6,18 @@ import java.awt.Point;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import javafx.geometry.Rectangle2D;
 import shooter.Main;
+import shooter.entities.Enemy;
 import shooter.entities.Player;
+import shooter.events.EventHandler;
 import shooter.events.EventListener;
 import shooter.events.Listener;
+import shooter.events.types.GameOverEvent;
 import shooter.events.types.GameTickEvent;
 import shooter.events.types.PreGameInitiateEvent;
 import shooter.events.types.RepaintEvent;
@@ -22,9 +27,10 @@ public class PaintPlayerListener implements Listener {
 
     Player player;
     BufferedImage playerImage;
-
+    Random r;
     public PaintPlayerListener() {
         player = LevelManager.getPlayer();
+        r = new Random();
     }
 
     @EventListener
@@ -39,6 +45,8 @@ public class PaintPlayerListener implements Listener {
 
     @EventListener
     public void onGameTick(GameTickEvent e) {
+        checkZombieCollision();
+        checkCrateCollision();
     }
 
     @EventListener
@@ -57,5 +65,41 @@ public class PaintPlayerListener implements Listener {
         g2.setTransform(af);
         g2.drawImage(playerImage, player.getX(), player.getY(), Main.getInstance().gamedisplay);
 
+    }
+    
+    public void checkZombieCollision() {
+        for(Enemy e : LevelManager.getCurrentLevel().getEnemies()) {
+            if(e.getBounds(e.getX(), e.getY()).intersects(player.getBounds(player.getX(), player.getY()))) {
+                int dmg = r.nextInt(6) + 8;
+                if(player.getHealth() - dmg <= 0) {
+                    player.setHealth(0);
+                    EventHandler.callEvent(new GameOverEvent());
+                    break;
+                }
+                player.setHealth(player.getHealth() - dmg);
+                // play sound
+                player.move("S");
+                player.move("S");
+                player.move("S");
+                player.move("S");
+            }
+        }
+    }
+    
+    public void checkCrateCollision() {
+        Rectangle2D ammobox = new Rectangle2D(LevelManager.getCurrentLevel().getAmmoX(), LevelManager.getCurrentLevel().getAmmoY(), 20, 20);
+        if(player.getBounds(player.getX(), player.getY()).intersects(ammobox)) {
+            player.setPistolAmmo(75);
+            player.setRifleAmmo(250);
+            // play sound
+            LevelManager.getCurrentLevel().setAmmoX(-5000);
+            System.out.println("test");
+        }
+        Rectangle2D healthpack = new Rectangle2D(LevelManager.getCurrentLevel().getHealthpackX(), LevelManager.getCurrentLevel().getHealthpackY(), 20, 20);
+        if(player.getBounds(player.getX(), player.getY()).intersects(healthpack)) {
+            player.setHealth(100);
+            // play sound
+            LevelManager.getCurrentLevel().setHealthpackX(-5000);
+        }
     }
 }

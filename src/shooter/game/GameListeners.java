@@ -13,6 +13,7 @@ import shooter.entities.WeaponType;
 import shooter.events.EventListener;
 import shooter.events.Listener;
 import shooter.events.types.GameInitiateEvent;
+import shooter.events.types.GameOverEvent;
 import shooter.events.types.GameTickEvent;
 import shooter.events.types.PreGameInitiateEvent;
 import shooter.level.LevelManager;
@@ -103,6 +104,10 @@ public class GameListeners implements Listener {
         am.put("PISTOL", new GameInput(e -> {
             LevelManager.getPlayer().setWeapon(WeaponType.PISTOL);
         }));
-
+    }
+    
+    @EventListener
+    public void onGameOver(GameOverEvent e) {
+        // put a thing here
     }
 }
