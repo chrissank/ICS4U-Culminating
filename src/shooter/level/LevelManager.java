@@ -72,10 +72,9 @@ public class LevelManager {
         	levelOneWalls[i] = new Wall(x.get(i), y.get(i), width.get(i), height.get(i));
     	}
     	
-        currentLevel = new Level(levelOneWalls, 60, 200, 200, 300, 300, diff);
     	if (!CheckWallCompatibility(numberOfWalls)) GenerateLevel();
 
-    	else currentLevel = new Level(levelOneWalls, 60, 600, 600, diff);
+    	else currentLevel = new Level(levelOneWalls, 60, 200, 200, 300, 300, diff);
     }
     
     private static boolean CheckWallCompatibility(int numberOfWalls) {
