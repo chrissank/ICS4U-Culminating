@@ -141,22 +141,22 @@ public class ShooterMenu extends JPanel implements ActionListener {
 		setMainButtons(controls, "Controls", 250);
 		setMainButtons(quit, "Quit", 500);
 		
-		setConfirmPlayPanelDetails(easyDifficulty, 0);
-		setConfirmPlayPanelDetails(mediumDifficulty, 40);
-		setConfirmPlayPanelDetails(hardDifficulty, 80);
+		setConfirmPlayPanelDetails(easyDifficulty, 20);
+		setConfirmPlayPanelDetails(mediumDifficulty, 60);
+		setConfirmPlayPanelDetails(hardDifficulty, 100);
 		confirmPlay.addActionListener(this);
 		confirmPlay.setActionCommand("Go");
 		confirmPlay.setFont(defaultFont);
 		confirmPlay.setVisible(confirmPlayShown);
-		confirmPlay.setBounds(GameFrame.width / 3, (GameFrame.height / 5) + 120, 140, 50);
+		confirmPlay.setBounds(GameFrame.width / 3, (GameFrame.height / 5) + 140, 140, 50);
 		
-		setControlLabels(weaponOne, 0);
-		setControlLabels(weaponTwo, 20);
-		setControlLabels(forwards, 50);
-		setControlLabels(backwards, 70);
-		setControlLabels(left, 90);
-		setControlLabels(right, 110);
-		setControlLabels(shoot, 140);
+		setControlLabels(weaponOne, 20);
+		setControlLabels(weaponTwo, 40);
+		setControlLabels(forwards, 70);
+		setControlLabels(backwards, 90);
+		setControlLabels(left, 110);
+		setControlLabels(right, 130);
+		setControlLabels(shoot, 160);
 	}
 	
 	private void setMainButtons(JButton button, String actionCommand, int space) {
