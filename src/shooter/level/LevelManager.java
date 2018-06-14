@@ -14,6 +14,8 @@ public class LevelManager {
     private static Player player;
     private static Level currentLevel;
     
+    public static int healthX, healthY, ammoX, ammoY;
+    
     public static ArrayList<Integer> x = new ArrayList<Integer>();
     public static ArrayList<Integer> y = new ArrayList<Integer>();
     public static ArrayList<Integer> width = new ArrayList<Integer>();
@@ -49,47 +51,30 @@ public class LevelManager {
     	Random rand = new Random();
     	
     	int numberOfWalls = (rand.nextInt(50) % 5) + 4;
+    	//int numberOfWalls = 50;
     	
-    	Wall[] levelOneWalls = new Wall[numberOfWalls];
+    	Wall[] currentLevelWalls = new Wall[numberOfWalls];
     	
     	for (int i = 0; i < numberOfWalls; i++) {
-        	if (getRandomBoolean()) {
-        		width.add(50);
-        		height.add(rand.nextInt(75) + 100);
-        	}
-        	
-        	else {
-        		height.add(50);
-        		width.add(rand.nextInt(75) + 100);
-        	}
-        	
+        	boolean wallType = getRandomBoolean();
+    		width.add(wallType ? 50 : rand.nextInt(75) + 100);
+    		height.add(wallType ? rand.nextInt(75) + 100 : 50);
+    		
         	int correctedBorderX = borderX + width.get(i);
         	int correctedBorderY = borderY + height.get(i);
         	
         	x.add(rand.nextInt(GameFrame.width - (correctedBorderX * 2)) + correctedBorderX);
         	y.add(rand.nextInt(GameFrame.height - (correctedBorderY * 2)) + correctedBorderY);        		
-        	     	
-        	levelOneWalls[i] = new Wall(x.get(i), y.get(i), width.get(i), height.get(i));
+        	
+        	currentLevelWalls[i] = new Wall(x.get(i), y.get(i), width.get(i), height.get(i));
+        	
+        	if (currentLevelWalls[i].getBounds().intersects(player.getBounds(player.getX(), player.getY()))) {
+        		currentLevelWalls[i] = null;
+        		i--;
+        	}
     	}
-    	
-        currentLevel = new Level(levelOneWalls, 60, 200, 200, 300, 300, diff);
-    	if (!CheckWallCompatibility(numberOfWalls)) GenerateLevel();
 
-    	else currentLevel = new Level(levelOneWalls, 60, 600, 600, diff);
-    }
-    
-    private static boolean CheckWallCompatibility(int numberOfWalls) {
-    	int playerSpawnX = GameFrame.width / 2;
-    	int playerSpawnY = GameFrame.height / 2;
-    	
-    	for (int i = 0; i < numberOfWalls; i++) {
-        	boolean xValuesCollide = x.get(i) < playerSpawnX && (x.get(i) + width.get(i)) > playerSpawnX;
-        	boolean yValuesCollide = y.get(i) < playerSpawnY && (y.get(i) + height.get(i)) > playerSpawnY;
-    		
-    		if (xValuesCollide && yValuesCollide) return false;
-    	}
-    	
-    	return true;
+    	currentLevel = new Level(currentLevelWalls, 60, healthX, healthY, ammoX, ammoY, diff);
     }
     
     private static boolean getRandomBoolean() {
