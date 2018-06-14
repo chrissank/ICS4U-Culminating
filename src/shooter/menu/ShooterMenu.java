@@ -2,15 +2,11 @@ package shooter.menu;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
@@ -170,13 +166,13 @@ public class ShooterMenu extends JPanel implements ActionListener {
         confirmPlay.setVisible(confirmPlayShown);
         confirmPlay.setBounds(GameFrame.width / 3, (GameFrame.height / 5) + 120, 140, 50);
 
-        setControlLabels(weaponOne, 0);
-        setControlLabels(weaponTwo, 20);
-        setControlLabels(forwards, 50);
-        setControlLabels(backwards, 70);
-        setControlLabels(left, 90);
-        setControlLabels(right, 110);
-        setControlLabels(shoot, 140);
+        setControlLabels(weaponOne, 20);
+		setControlLabels(weaponTwo, 40);
+		setControlLabels(forwards, 70);
+		setControlLabels(backwards, 90);
+		setControlLabels(left, 110);
+		setControlLabels(right, 130);
+		setControlLabels(shoot, 160);
     }
 
     private void setMainButtons(JButton button, String actionCommand, int space) {
