@@ -11,9 +11,9 @@ public class Level {
     Random r;
     private ArrayList<Wall> walls;
     private ArrayList<Enemy> enemies;
-    private int time, healthx, healthy, nextEnemyID, difficulty, ammox, ammoy;
+    private int time, healthx, healthy, nextEnemyID, difficulty, ammox, ammoy, number;
     
-    public Level(ArrayList<Wall> walls, int time, int healthx, int healthy, int ammox, int ammoy, int difficulty) {
+    public Level(ArrayList<Wall> walls, int time, int healthx, int healthy, int ammox, int ammoy, int difficulty, int number) {
         this.walls = walls;
         this.enemies = new ArrayList<>();
         this.time = time;
@@ -23,6 +23,7 @@ public class Level {
         this.ammoy = ammoy;
         this.nextEnemyID = 0;
         this.difficulty = difficulty;
+        this.number = number;
         r = new Random();
     }
 
@@ -64,6 +65,10 @@ public class Level {
         return this.difficulty;
     }
 
+    public int getNumber() {
+        return this.number;
+    }
+    
     public void spawn() {
         addEnemy(new Enemy(r.nextInt(3), 100, 2));
     }

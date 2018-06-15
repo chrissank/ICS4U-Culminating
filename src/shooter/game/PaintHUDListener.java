@@ -25,7 +25,6 @@ public class PaintHUDListener implements Listener {
 
     Player player;
     Main main;
-    BufferedImage backgroundImg;
     BufferedImage pistolImg;
     BufferedImage pistolAmmoImg;
     BufferedImage rifleImg;
@@ -45,7 +44,6 @@ public class PaintHUDListener implements Listener {
     @EventListener
     public void onGameStart(PreGameInitiateEvent e) {
         try {
-            backgroundImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Background.png"));
             pistolImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Pistol.png"));
             pistolAmmoImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Pistol_Ammo_Icon.png"));
             rifleImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Rifle.png"));
@@ -72,9 +70,6 @@ public class PaintHUDListener implements Listener {
         drawWeaponButtons(g2);
         paintButtons(g2); 
         //IF ZOMBIE DIES
-        
-        //BACKGROUND IMAGE NOT WORKING AT THE MOMENT
-        //g2.drawImage(backgroundImg, 0, 0, this);
     }
 
     private void paintButtons(Graphics2D g2) {

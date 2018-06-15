@@ -22,6 +22,7 @@ import shooter.events.types.GameTickEvent;
 import shooter.events.types.PreGameInitiateEvent;
 import shooter.events.types.RepaintEvent;
 import shooter.level.LevelManager;
+import shooter.music.MusicManager;
 
 public class PaintPlayerListener implements Listener {
 
@@ -92,13 +93,14 @@ public class PaintPlayerListener implements Listener {
             player.setPistolAmmo(75);
             player.setRifleAmmo(250);
             // play sound
+            MusicManager.playClip("Pick_Up");
             LevelManager.getCurrentLevel().setAmmoX(-5000);
-            System.out.println("test");
         }
         Rectangle2D healthpack = new Rectangle2D(LevelManager.getCurrentLevel().getHealthpackX(), LevelManager.getCurrentLevel().getHealthpackY(), 20, 20);
         if(player.getBounds(player.getX(), player.getY()).intersects(healthpack)) {
             player.setHealth(100);
             // play sound
+            MusicManager.playClip("Pick_Up");
             LevelManager.getCurrentLevel().setHealthpackX(-5000);
         }
     }
