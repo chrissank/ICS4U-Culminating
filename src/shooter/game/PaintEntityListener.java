@@ -34,7 +34,7 @@ public class PaintEntityListener implements Listener {
     BufferedImage healthPackImg;
     BufferedImage ammoBoxImg;
     Color[] redColour = new Color[4];
-    ConcurrentHashMap<Integer, Integer> xy;
+    public static ConcurrentHashMap<Integer, Integer> xy;
     
     public PaintEntityListener() {
         this.width = Toolkit.getDefaultToolkit().getScreenSize().width + 2;

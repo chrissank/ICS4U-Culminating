@@ -12,6 +12,7 @@ import shooter.entities.Wall;
 import shooter.entities.WeaponType;
 import shooter.events.EventHandler;
 import shooter.events.types.PreGameInitiateEvent;
+import shooter.game.PaintEntityListener;
 
 public class LevelManager {
 
@@ -26,6 +27,8 @@ public class LevelManager {
     public static ArrayList<Integer> height = new ArrayList<Integer>();
 
     public static void nextLevel() {
+        Main.getInstance().thread.STATUS = false;
+        PaintEntityListener.xy.clear();
         EventHandler.callEvent(new PreGameInitiateEvent(diff, Main.getInstance().gamedisplay, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height));
     }
 
