@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import shooter.GameFrame;
 import shooter.Main;
 import shooter.entities.Player;
 import shooter.entities.WeaponType;
@@ -66,7 +67,10 @@ public class PaintHUDListener implements Listener {
     }
 
     public void drawHUD(Graphics2D g2)
-    {        
+    {
+    	g2.setFont(new Font("ZombieA", Font.PLAIN, 50));
+    	g2.drawString("Level " + LevelManager.level + " - " + LevelManager.currentLevel.getTime(), (GameFrame.width / 2) - 110, 75);
+    	
         drawHealthBar(g2);
         drawAmmo(g2);
         drawWeaponButtons(g2);
@@ -105,7 +109,7 @@ public class PaintHUDListener implements Listener {
         g2.fill(new Rectangle2D.Double(healthBarX - 150, healthBarY, player.getHealth() * 3, 40)); //Health bar filled portion
 
         g2.setPaint(Color.BLACK);
-        g2.setFont(new Font("Roboto", Font.BOLD, 22));
+        g2.setFont(new Font("ZombieA", Font.BOLD, 22));
         g2.drawString(Integer.toString(player.getHealth()), healthBarX - 10, healthBarY + 70); // Health number below health bar
     }
 

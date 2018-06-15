@@ -14,7 +14,8 @@ public class LevelManager {
 
     private static int diff;
     private static Player player;
-    private static Level currentLevel;
+    public static Level currentLevel;
+    public static int level;
 
     public static ArrayList<Integer> x = new ArrayList<Integer>();
     public static ArrayList<Integer> y = new ArrayList<Integer>();
@@ -102,6 +103,7 @@ public class LevelManager {
         }
 
         currentLevel = new Level(walls, 60, healthX, healthY, ammoX, ammoY, diff);
+        level++;
     }
 
     private static boolean getRandomBoolean() {
