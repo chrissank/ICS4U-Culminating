@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.geometry.Rectangle2D;
 import shooter.level.LevelManager;
+import shooter.music.MusicManager;
 
 public class Player {
 
@@ -160,14 +161,15 @@ public class Player {
             if(pistolAmmo <= 0) return;
             if(tick % 10 != 0) return;
             pistolAmmo--;
+            MusicManager.playClip("Pistol Shot");
         } else {
             if(rifleAmmo <= 0) return;
             if(tick % 5 != 0) return;
             rifleAmmo--;
+            MusicManager.playClip("Rifle Shot");
         }
         shot.add(new Bullet(x, y, rotation, weapon, nextID));
         nextID++;
-        //EventHandler.callEvent(new );
     }
 
     public List<Bullet> getBullets() {
