@@ -55,7 +55,6 @@ public class LevelManager {
         ArrayList<Wall> walls = new ArrayList<>();
         
         for (int i = 0; i < numberOfWalls; i++) {
-            System.out.println("test7");
             boolean wallType = getRandomBoolean();
             width.add(wallType ? 50 : rand.nextInt(75) + 100);
             height.add(wallType ? rand.nextInt(75) + 100 : 50);
