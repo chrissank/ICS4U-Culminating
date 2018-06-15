@@ -1,6 +1,8 @@
 package shooter.music;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -19,7 +21,8 @@ public class MusicManager {
         Thread th = new Thread(() -> {
             AudioInputStream ais;
             try {
-                ais = AudioSystem.getAudioInputStream(MusicManager.class.getResourceAsStream("/resources/" + name + ".wav"));
+                InputStream bufferedIn = new BufferedInputStream(MusicManager.class.getResourceAsStream("/resources/" + name + ".wav"));
+                ais = AudioSystem.getAudioInputStream(bufferedIn);
                 Clip c = AudioSystem.getClip();
                 c.open(ais);
 
@@ -41,10 +44,10 @@ public class MusicManager {
         Thread th = new Thread(() -> {
             AudioInputStream ais;
             try {
-                ais = AudioSystem.getAudioInputStream(MusicManager.class.getResourceAsStream("/resources/" + name + ".wav"));
+                InputStream bufferedIn = new BufferedInputStream(MusicManager.class.getResourceAsStream("/resources/" + name + ".wav"));
+                ais = AudioSystem.getAudioInputStream(bufferedIn);
                 Clip c = AudioSystem.getClip();
                 c.open(ais);
-                c.loop(loops);
 
                 c.start();
             } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {

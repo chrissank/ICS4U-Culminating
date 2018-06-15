@@ -24,7 +24,6 @@ public class InitializeListener implements Listener {
         main.frame.add(main.menu, "menu");
         main.frame.add(main.gamedisplay, "gamedisplay");
         main.frame.lay.show(main.menu.getParent(), "menu");
-        System.out.println("play");
         MusicManager.playClip("Menu Theme", 5);
     }
 
