@@ -1,7 +1,5 @@
 package shooter;
 
-import java.awt.GraphicsEnvironment;
-import java.io.Console;
 import java.io.IOException;
 
 import shooter.events.CoreListeners;
@@ -30,16 +28,9 @@ public class Main {
     public GameThread thread;
 
     public static void main(String[] args) throws IOException {
-        Console c = System.console();
-        if(c == null && !GraphicsEnvironment.isHeadless()) {
-            // creates visible console cmd prompt
-            String filename = Main.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
-            Runtime.getRuntime().exec(new String[]{"cmd","/c","start","cmd","/k","java -jar \"" + filename + "\""});
-        } else {
-            instance = new Main();
-            instance.registerListeners();
-            instance.initialize();
-        }
+        instance = new Main();
+        instance.registerListeners();
+        instance.initialize();
     }
 
     public void initialize() {

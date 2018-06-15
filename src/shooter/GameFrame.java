@@ -3,6 +3,7 @@ package shooter;
 import java.awt.CardLayout;
 
 import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 public class GameFrame extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -18,6 +19,7 @@ public class GameFrame extends JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         this.setUndecorated(true);
         this.setVisible(true);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     public CardLayout getLayout() {
