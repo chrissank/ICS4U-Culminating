@@ -6,9 +6,12 @@ import java.util.Random;
 
 import javafx.geometry.Rectangle2D;
 import shooter.GameFrame;
+import shooter.Main;
 import shooter.entities.Player;
 import shooter.entities.Wall;
 import shooter.entities.WeaponType;
+import shooter.events.EventHandler;
+import shooter.events.types.PreGameInitiateEvent;
 
 public class LevelManager {
 
@@ -23,7 +26,7 @@ public class LevelManager {
     public static ArrayList<Integer> height = new ArrayList<Integer>();
 
     public static void nextLevel() {
-        //reset bullet id and clear the shot list
+        EventHandler.callEvent(new PreGameInitiateEvent(diff, Main.getInstance().gamedisplay, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height));
     }
 
     public static void init(int difference) {
@@ -101,7 +104,7 @@ public class LevelManager {
             }
         }
 
-        currentLevel = new Level(walls, 60, healthX, healthY, ammoX, ammoY, diff, levelCount);
+        currentLevel = new Level(walls, 30, healthX, healthY, ammoX, ammoY, diff, levelCount);
         levelCount++;
     }
 

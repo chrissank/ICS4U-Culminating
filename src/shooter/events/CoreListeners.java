@@ -7,7 +7,6 @@ import shooter.events.types.GameTickEvent;
 import shooter.events.types.InitiateEvent;
 import shooter.events.types.MenuInitiateEvent;
 import shooter.events.types.PreGameInitiateEvent;
-import shooter.game.GameThread;
 
 public class CoreListeners implements Listener {
     
@@ -33,6 +32,6 @@ public class CoreListeners implements Listener {
     
     @EventListener
     public void onGameOver(GameOverEvent e) {
-        GameThread.STATUS = false;
+        main.thread.STATUS = false;
     }
 }

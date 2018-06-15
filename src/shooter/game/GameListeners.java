@@ -39,7 +39,7 @@ public class GameListeners implements Listener {
 
         main.frame.setFocusable(true);
         main.frame.requestFocus();
-        main.thread.start();
+        if(!main.thread.isAlive()) main.thread.start();
     }
 
     @EventListener
@@ -110,15 +110,18 @@ public class GameListeners implements Listener {
     @EventListener
     public void onGameOver(GameOverEvent e) {
         Object[] options = {"OK"};
+        String str = LevelManager.getPlayer().getHealth() > 0 ? "You have passed level " + LevelManager.getCurrentLevel().getNumber() + "!" : "Game Over!";
         int n = JOptionPane.showOptionDialog(null,
-                "Game over! ","Game over.",
+                str,"Game over.",
                 JOptionPane.PLAIN_MESSAGE,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 options,
                 options[0]);
-        if(n == 0)
+        if(n == 0 && str.contains("You"))
         {
+            LevelManager.nextLevel();
+        } else {
             System.exit(0);
         }
     }

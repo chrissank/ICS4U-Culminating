@@ -10,12 +10,14 @@ import shooter.level.LevelManager;
  */
 public class GameThread extends Thread {
     
-    public static boolean STATUS = true;
+    public boolean STATUS = true;
     public static int time = 0;
     int tick;
     
     public void run() {
+        STATUS = true;
         tick = 0;
+        time = 0;
         while(STATUS) {
             EventHandler.callEvent(new GameTickEvent(tick));
             tick++;
@@ -45,9 +47,5 @@ public class GameThread extends Thread {
                 e.printStackTrace();
             }
         }
-    }
-    
-    public static void cancel() {
-        STATUS = false;
     }
 }
