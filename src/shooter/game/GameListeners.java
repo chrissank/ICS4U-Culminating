@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
@@ -108,6 +109,17 @@ public class GameListeners implements Listener {
     
     @EventListener
     public void onGameOver(GameOverEvent e) {
-        // put a thing here
+        Object[] options = {"OK"};
+        int n = JOptionPane.showOptionDialog(null,
+                "Game over! ","Game over.",
+                JOptionPane.PLAIN_MESSAGE,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+        if(n == 0)
+        {
+            System.exit(0);
+        }
     }
 }

@@ -1,6 +1,7 @@
 package shooter.game;
 
 import shooter.events.EventHandler;
+import shooter.events.types.GameOverEvent;
 import shooter.events.types.GameTickEvent;
 import shooter.level.LevelManager;
 
@@ -21,6 +22,9 @@ public class GameThread extends Thread {
             if(tick == 41) {
                 time++;
                 tick = 0;
+            }
+            if(time == LevelManager.getCurrentLevel().getTime()) {
+                EventHandler.callEvent(new GameOverEvent());
             }
             if(LevelManager.getCurrentLevel().getDifficulty() == 0) {
                 if(time % 2 == 0 && tick == 40) {

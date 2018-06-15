@@ -101,7 +101,7 @@ public class LevelManager {
             }
         }
 
-        currentLevel = new Level(walls, 60, healthX, healthY, ammoX, ammoY, diff, levelCount);
+        currentLevel = new Level(walls, 5, healthX, healthY, ammoX, ammoY, diff, levelCount);
         levelCount++;
     }
 
