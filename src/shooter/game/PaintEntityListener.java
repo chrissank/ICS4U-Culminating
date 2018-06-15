@@ -8,7 +8,8 @@ import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.imageio.ImageIO;
 
@@ -33,6 +34,7 @@ public class PaintEntityListener implements Listener {
     BufferedImage healthPackImg;
     BufferedImage ammoBoxImg;
     Color[] redColour = new Color[4];
+    ConcurrentHashMap<Integer, Integer> xy;
     
     public PaintEntityListener() {
         this.width = Toolkit.getDefaultToolkit().getScreenSize().width + 2;
@@ -47,7 +49,7 @@ public class PaintEntityListener implements Listener {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
+        xy = new ConcurrentHashMap<>();
         redColour[0] = new Color(181, 17, 17);
         redColour[1] = new Color(192, 19, 19);
         redColour[2] = new Color(155, 11, 11);
@@ -69,6 +71,13 @@ public class PaintEntityListener implements Listener {
         paintWalls(e.getGraphics());
         paintEnemy(e.getGraphics());
         paintCrates(e.getGraphics());
+        paintBlood(e.getGraphics());
+    }
+    
+    private void paintBlood(Graphics2D g2) {
+        for(Entry<Integer, Integer> ent : xy.entrySet()) {
+            generateBloodSplatter(g2, ent.getKey(), ent.getValue());
+        }
     }
     
     private void checkBulletCollision() {
@@ -82,6 +91,7 @@ public class PaintEntityListener implements Listener {
                         e.setX(-50000);
                         toRemoveEnemy.add(e.getID());
                     }
+                    xy.put(e.getX(), e.getY());
                     //generateBloodSplatter(Graphics2D g2, int x, int y)
                 }
             }
@@ -94,8 +104,6 @@ public class PaintEntityListener implements Listener {
                 }
             }
         }
-        /*for(int i : toRemoveEnemy) LevelManager.getCurrentLevel().getEnemies().remove(i);
-        toRemoveEnemy.clear();*/
         for(int i : toRemoveBullet) LevelManager.getPlayer().getBullets().remove(i);
         toRemoveBullet.clear();
     }
@@ -145,35 +153,11 @@ public class PaintEntityListener implements Listener {
     }
 
     private void generateBloodSplatter(Graphics2D g2, int x, int y) {
-        Random rand = new Random();
-        int numberOfSplats = (rand.nextInt(10) % 4) + 1;
-        int sizeOfSplat = rand.nextInt(10) + 10;
-        int colorIndex = rand.nextInt(10) % 4;
-        
-        for (int i = 0; i < numberOfSplats; i++) {
-            int randomSpaceX = (rand.nextInt(50) % 10) + 1;
-            int randomSpaceY = (rand.nextInt(50) % 10) + 1;
-            drawBloodSplat(g2, x, y, sizeOfSplat, colorIndex, randomSpaceX, randomSpaceY);
-        }
-    }
-    
-    private void drawBloodSplat(Graphics2D g2, int x, int y, int sizeOfSplat, int colorIndex, int randomSpaceX, int randomSpaceY) {
-        
-        if (getRandomBoolean() == true) {
-            x += randomSpaceX;
-            y -= randomSpaceY;
-        }
-        
-        else {
-            x -= randomSpaceX;
-            y += randomSpaceY;
-        }
-        
-        g2.setPaint(redColour[colorIndex]);
-        g2.fill(new Ellipse2D.Double(x, y, sizeOfSplat, sizeOfSplat));
-    }
-    
-    private boolean getRandomBoolean() {
-        return Math.random() < 0.5;
+        g2.setColor(Color.RED);
+        g2.fill(new Ellipse2D.Double(x - 1, y + 2, 12, 7));
+        g2.fill(new Ellipse2D.Double(x - 2, y, 9, 13));
+        g2.fill(new Ellipse2D.Double(x + 11, y + 13, 11, 6));
+        g2.fill(new Ellipse2D.Double(x - 2, y +1, 11, 6));
+        g2.fill(new Ellipse2D.Double(x + 2, y -5, 11, 6));
     }
 }

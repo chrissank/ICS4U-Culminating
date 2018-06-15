@@ -1,7 +1,6 @@
 package shooter.music;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -12,8 +11,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class MusicManager {
 
-    private static Thread th;
-    private static ArrayList<Clip> clips;
     /**
      * 
      * @param str name of file WITHOUT .wav and /resources/
