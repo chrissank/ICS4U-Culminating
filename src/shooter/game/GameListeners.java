@@ -10,7 +10,6 @@ import javax.swing.KeyStroke;
 
 import shooter.Main;
 import shooter.entities.Player;
-import shooter.entities.WeaponType;
 import shooter.events.EventListener;
 import shooter.events.Listener;
 import shooter.events.types.GameInitiateEvent;
@@ -66,7 +65,6 @@ public class GameListeners implements Listener {
         m.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, 0, true), "BACK_RELEASE");
         m.put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, false), "SHOOT_PRESS");
         m.put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, true), "SHOOT_RELEASE");
-        m.put(KeyStroke.getKeyStroke(KeyEvent.VK_1, 0, false), "PISTOL");
         m.put(KeyStroke.getKeyStroke(KeyEvent.VK_2, 0, false), "RIFLE");
         
         am.put("UP_PRESS", new GameInput(e -> {
@@ -98,12 +96,6 @@ public class GameListeners implements Listener {
         }));
         am.put("SHOOT_RELEASE", new GameInput(e -> {
             LevelManager.getPlayer().setShooting(false);
-        }));
-        am.put("RIFLE", new GameInput(e -> {
-            LevelManager.getPlayer().setWeapon(WeaponType.RIFLE);
-        }));
-        am.put("PISTOL", new GameInput(e -> {
-            LevelManager.getPlayer().setWeapon(WeaponType.PISTOL);
         }));
     }
     

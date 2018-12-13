@@ -4,12 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.imageio.ImageIO;
 
@@ -17,7 +15,6 @@ import shooter.Main;
 import shooter.entities.Bullet;
 import shooter.entities.Enemy;
 import shooter.entities.Wall;
-import shooter.entities.WeaponType;
 import shooter.events.EventListener;
 import shooter.events.Listener;
 import shooter.events.types.GameTickEvent;
@@ -33,8 +30,12 @@ public class PaintEntityListener implements Listener {
     BufferedImage enemyImage;
     BufferedImage healthPackImg;
     BufferedImage ammoBoxImg;
-    Color[] redColour = new Color[4];
-    public static ConcurrentHashMap<Integer, Integer> xy;
+    ArrayList<BufferedImage> paintImgs;
+    ArrayList<BufferedImage> bloodImgs;
+    public static int[][] bloodXYI;
+    public static int[][] paintXYI;
+    public static int count1 = 0;
+    public static int count2 = 0;
     
     public PaintEntityListener() {
         this.width = Toolkit.getDefaultToolkit().getScreenSize().width + 2;
@@ -42,19 +43,23 @@ public class PaintEntityListener implements Listener {
         toRemoveBullet = new ArrayList<>();
         toRemoveEnemy = new ArrayList<>();
         blank = new AffineTransform();
+        paintImgs = new ArrayList<>();
+        bloodImgs = new ArrayList<>();
         try {
             enemyImage = ImageIO.read(PaintEntityListener.class.getResource("/resources/Zombie.png"));
             healthPackImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Health Pack.png"));
+            paintImgs.add(ImageIO.read(PaintHUDListener.class.getResource("/resources/paintball1.png")));
+            paintImgs.add(ImageIO.read(PaintHUDListener.class.getResource("/resources/paintball2.png")));
+            paintImgs.add(ImageIO.read(PaintHUDListener.class.getResource("/resources/paintball3.png")));
+            bloodImgs.add(ImageIO.read(PaintHUDListener.class.getResource("/resources/blood1.png")));
+            bloodImgs.add(ImageIO.read(PaintHUDListener.class.getResource("/resources/blood2.png")));
+            bloodImgs.add(ImageIO.read(PaintHUDListener.class.getResource("/resources/blood3.png")));
             ammoBoxImg = ImageIO.read(PaintHUDListener.class.getResource("/resources/Ammo Box.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        xy = new ConcurrentHashMap<>();
-        redColour[0] = new Color(181, 17, 17);
-        redColour[1] = new Color(192, 19, 19);
-        redColour[2] = new Color(155, 11, 11);
-        redColour[3] = new Color(183, 43, 43);
-        
+        bloodXYI = new int[10000][3];
+        paintXYI = new int[10000][3];
     }
     
     @EventListener
@@ -68,15 +73,17 @@ public class PaintEntityListener implements Listener {
     @EventListener
     public void onPaint(RepaintEvent e) {
         paintBullets(e.getGraphics());
+        paintPaintballs(e.getGraphics());
         paintWalls(e.getGraphics());
         paintEnemy(e.getGraphics());
         paintCrates(e.getGraphics());
         paintBlood(e.getGraphics());
     }
-    
+
     private void paintBlood(Graphics2D g2) {
-        for(Entry<Integer, Integer> ent : xy.entrySet()) {
-            generateBloodSplatter(g2, ent.getKey(), ent.getValue());
+        for(int[] arr : bloodXYI) {
+            if(arr[0] == arr[1] && arr[1] == 0) continue;
+            g2.drawImage(bloodImgs.get(arr[2]), arr[0], arr[1], Main.getInstance().gamedisplay);
         }
     }
     
@@ -84,21 +91,22 @@ public class PaintEntityListener implements Listener {
         for(Enemy e : LevelManager.getCurrentLevel().getEnemies()) {
             for(Bullet b : LevelManager.getPlayer().getBullets()) {
                 if(b.getBounds().intersects(e.getBounds(e.getX(), e.getY()))) {
-                    e.setHealth(e.getHealth() - (b.getType() == WeaponType.PISTOL ? 40 : 20));
+                    e.setHealth(e.getHealth() - 20);
                     b.setX(-50000);
                     toRemoveBullet.add(b.getID());
                     if(e.getHealth() <= 0) {
                         e.setX(-50000);
                         toRemoveEnemy.add(e.getID());
                     }
-                    xy.put(e.getX(), e.getY());
-                    //generateBloodSplatter(Graphics2D g2, int x, int y)
+                    bloodXYI[count2] = new int[]{e.getX(), e.getY(), ThreadLocalRandom.current().nextInt(bloodImgs.size())};
+                    count2++;
                 }
             }
         }
         for(Wall w : LevelManager.getCurrentLevel().getWalls()) {
             for(Bullet b : LevelManager.getPlayer().getBullets()) {
                 if(b.getBounds().intersects(w.getBounds())) {
+                    addPaintball(b.getX(), b.getY());
                     b.setX(-5000);
                     toRemoveBullet.add(b.getID());
                 }
@@ -107,7 +115,19 @@ public class PaintEntityListener implements Listener {
         for(int i : toRemoveBullet) LevelManager.getPlayer().getBullets().remove(i);
         toRemoveBullet.clear();
     }
-
+    
+    private void addPaintball(int x, int y) {
+        paintXYI[count1] = new int[]{x, y, ThreadLocalRandom.current().nextInt(paintImgs.size())};
+        count1++;
+    }
+    
+    private void paintPaintballs(Graphics2D g2) {
+        for(int[] arr : paintXYI) {
+            if(arr[0] == arr[1] && arr[1] == 0) continue;
+            g2.drawImage(paintImgs.get(arr[2]), arr[0], arr[1], Main.getInstance().gamedisplay);
+        }
+    }
+     
     public void paintWalls(Graphics2D g2) {
         g2.setColor(new Color(45, 47, 49));
         for(Wall w : LevelManager.getCurrentLevel().getWalls()) {
@@ -128,9 +148,6 @@ public class PaintEntityListener implements Listener {
         g2.setTransform(blank);
         g2.setColor(Color.BLACK);
         for(Bullet b : LevelManager.getPlayer().getBullets()) {
-            if(b.getType() == WeaponType.PISTOL) {
-                g2.setColor(new Color(132, 55, 0));
-            }
             g2.drawRect(b.getX(), b.getY(), 1, 1);
             b.move();
             if(b.getX() > width) {
@@ -150,14 +167,5 @@ public class PaintEntityListener implements Listener {
         g2.setTransform(blank);
         g2.drawImage(healthPackImg, LevelManager.getCurrentLevel().getHealthpackX(), LevelManager.getCurrentLevel().getHealthpackY(), Main.getInstance().gamedisplay);
         g2.drawImage(ammoBoxImg, LevelManager.getCurrentLevel().getAmmoX(), LevelManager.getCurrentLevel().getAmmoY(), Main.getInstance().gamedisplay);
-    }
-
-    private void generateBloodSplatter(Graphics2D g2, int x, int y) {
-        g2.setColor(Color.RED);
-        g2.fill(new Ellipse2D.Double(x - 1, y + 2, 12, 7));
-        g2.fill(new Ellipse2D.Double(x - 2, y, 9, 13));
-        g2.fill(new Ellipse2D.Double(x + 11, y + 13, 11, 6));
-        g2.fill(new Ellipse2D.Double(x - 2, y +1, 11, 6));
-        g2.fill(new Ellipse2D.Double(x + 2, y -5, 11, 6));
     }
 }

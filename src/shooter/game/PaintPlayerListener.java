@@ -90,7 +90,6 @@ public class PaintPlayerListener implements Listener {
     public void checkCrateCollision() {
         Rectangle2D ammobox = new Rectangle2D(LevelManager.getCurrentLevel().getAmmoX(), LevelManager.getCurrentLevel().getAmmoY(), 20, 20);
         if(player.getBounds(player.getX(), player.getY()).intersects(ammobox)) {
-            player.setPistolAmmo(75);
             player.setRifleAmmo(250);
             // play sound
             MusicManager.playClip("Pick_Up");

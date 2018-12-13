@@ -10,17 +10,14 @@ import shooter.music.MusicManager;
 public class Player {
 
     private int nextID;
-    int x, y, health, pistolAmmo, rifleAmmo;
+    int x, y, health, rifleAmmo;
     double rotation;
-    WeaponType weapon;
     ArrayList<Bullet> shot;
     boolean left, right, forward, backward, shoot = false;
-    public Player(int x, int y, int health, WeaponType t, int pistolAmmo, int rifleAmmo, double rot) {
+    public Player(int x, int y, int health, int rifleAmmo, double rot) {
         this.x = x;
         this.y = y;
         this.health = health;
-        this.weapon = t;
-        this.pistolAmmo = pistolAmmo;
         this.rifleAmmo = rifleAmmo;
         this.rotation = rot;
         this.shot = new ArrayList<>();
@@ -51,38 +48,24 @@ public class Player {
         this.health = newHealth;
     }
 
-    public int getPistolAmmo() {
-        return pistolAmmo;
-    }
-    
     public int getRifleAmmo() {
-    	return rifleAmmo;
+        return rifleAmmo;
     }
 
-    public void setPistolAmmo(int newAmmo) {
-        this.pistolAmmo = newAmmo;
-    }
-    
+
     public void setRifleAmmo(int newAmmo) {
-    	this.rifleAmmo = newAmmo;
+        this.rifleAmmo = newAmmo;
     }
-    
-    public WeaponType getWeapon() {
-        return this.weapon;
-    }
-    
-    public void setWeapon(WeaponType newWep) {
-        this.weapon = newWep;
-    }
-    
+
+
     public double getRotation() {
         return this.rotation;
     }
-    
+
     public void setRotation(double rot) {
         this.rotation = rot;
     }
-    
+
     public void setLeft(boolean b) {
         this.left = b;
     }
@@ -90,43 +73,43 @@ public class Player {
     public void setRight(boolean b) {
         this.right = b;
     }
-    
+
     public void setForward(boolean b) {
         this.forward = b;
     }
-    
+
     public void setBackward(boolean b) {
         this.backward = b;
     }
-    
+
     public void setShooting(boolean b) {
         this.shoot = b;
     }
-    
+
     public boolean isLeft() {
         return this.left;
     }
-    
+
     public boolean isRight() {
         return this.right;
     }
-    
+
     public boolean isForward() {
         return this.forward;
     }
-    
+
     public boolean isBackward() {
         return this.backward;
     }
-    
+
     public boolean isShooting() {
         return this.shoot;
     }
-    
+
     public String toString() {
-        return "x: " + x + " y: " + y + " health: " + health + " weapon: " + weapon.toString() + " pistol ammo: " + pistolAmmo + " rifle ammo: " + rifleAmmo;
+        return "x: " + x + " y: " + y + " health: " + health + " rifle ammo: " + rifleAmmo;
     }
-    
+
     public void move(String dir) {
         int speed = 8;
         if(left && forward) speed /= 2;
@@ -155,20 +138,14 @@ public class Player {
         x += (tempX - x);
         y += (tempY - y);
     }
-    
+
     public void shoot(int tick) {
-        if(this.weapon == WeaponType.PISTOL) {
-            if(pistolAmmo <= 0) return;
-            if(tick % 10 != 0) return;
-            pistolAmmo--;
-            MusicManager.playClip("Pistol Shot");
-        } else {
-            if(rifleAmmo <= 0) return;
-            if(tick % 5 != 0) return;
-            rifleAmmo--;
-            MusicManager.playClip("Rifle Shot");
-        }
-        shot.add(new Bullet(x, y, rotation, weapon, nextID));
+
+        if(rifleAmmo <= 0) return;
+        if(tick % 5 != 0) return;
+        rifleAmmo--;
+        MusicManager.playClip("Rifle Shot");
+        shot.add(new Bullet(x, y, rotation, nextID));
         nextID++;
     }
 

@@ -9,7 +9,6 @@ import shooter.GameFrame;
 import shooter.Main;
 import shooter.entities.Player;
 import shooter.entities.Wall;
-import shooter.entities.WeaponType;
 import shooter.events.EventHandler;
 import shooter.events.types.PreGameInitiateEvent;
 import shooter.game.PaintEntityListener;
@@ -28,12 +27,15 @@ public class LevelManager {
 
     public static void nextLevel() {
         Main.getInstance().thread.STATUS = false;
-        PaintEntityListener.xy.clear();
+        PaintEntityListener.bloodXYI = new int[10000][3];
+        PaintEntityListener.paintXYI = new int[10000][3];
+        PaintEntityListener.count1 = 0;
+        PaintEntityListener.count2 = 0;
         EventHandler.callEvent(new PreGameInitiateEvent(diff, Main.getInstance().gamedisplay, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height));
     }
 
     public static void init(int difference) {
-        player = new Player(GameFrame.width / 2, GameFrame.height / 2, 100, WeaponType.PISTOL, 75, 250, 0);
+        player = new Player(GameFrame.width / 2, GameFrame.height / 2, 100, 250, 0);
         diff = difference;
         GenerateLevel();
     }
