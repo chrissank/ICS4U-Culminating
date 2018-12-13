@@ -33,14 +33,12 @@ public class ShooterMenu extends JPanel implements ActionListener {
     BufferedImage backgroundImage;
     JLabel background = new JLabel();
 
-    JLabel title = new JLabel("   ZOMBIE INFESTATION");
+    JLabel title = new JLabel("   ZOMBIE SPLATTER");
     JButton play = new JButton("Play");
     JButton controls = new JButton("Controls");
     JButton quit = new JButton("Quit");
     JPanel buttonsPanel = new JPanel();
 
-    JLabel weaponOne = new JLabel("1 - to use pistol");
-    JLabel weaponTwo  = new JLabel("2 - to use rifle");
     JLabel forwards = new JLabel("W - to move forward towards cursor");
     JLabel backwards = new JLabel("S - to move backward from cursor");
     JLabel left = new JLabel("A - to move left of cursor");
@@ -90,8 +88,6 @@ public class ShooterMenu extends JPanel implements ActionListener {
         this.add(hardDifficulty);
         this.add(confirmPlay);
 
-        this.add(weaponOne);
-        this.add(weaponTwo);
         this.add(forwards);
         this.add(backwards);
         this.add(left);
@@ -170,8 +166,6 @@ public class ShooterMenu extends JPanel implements ActionListener {
         confirmPlay.setVisible(confirmPlayShown);
         confirmPlay.setBounds(GameFrame.width / 3, (GameFrame.height / 5) + 140, 140, 50);
         
-        setControlLabels(weaponOne, 20);
-        setControlLabels(weaponTwo, 40);
         setControlLabels(forwards, 70);
         setControlLabels(backwards, 90);
         setControlLabels(left, 110);
@@ -219,8 +213,6 @@ public class ShooterMenu extends JPanel implements ActionListener {
     }
     
     private void controlLabelsVisibility() {
-        weaponOne.setVisible(controlsShown);
-        weaponTwo.setVisible(controlsShown);
         forwards.setVisible(controlsShown);
         backwards.setVisible(controlsShown);
         left.setVisible(controlsShown);
